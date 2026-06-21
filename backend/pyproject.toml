@@ -1,0 +1,65 @@
+[project]
+name = "asset-servicing-agent"
+version = "0.1.0"
+description = "Code-first agent for corporate-event document extraction with auditable uncertainty (BTG Asset Servicing case)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    # Agentic core
+    "langgraph>=0.2.50",
+    "langgraph-checkpoint-postgres>=2.0.0",
+    "langchain-core>=0.3.0",
+    "langchain-google-genai>=2.0.0",
+    # Schemas / settings
+    "pydantic>=2.9",
+    "pydantic-settings>=2.5",
+    # API
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "python-multipart>=0.0.12",
+    # Persistence
+    "sqlalchemy>=2.0",
+    "alembic>=1.13",
+    "psycopg[binary]>=3.2,<3.3",
+    # Extraction / provenance
+    "pymupdf>=1.24",
+    "pillow>=10.4",
+    "rapidfuzz>=3.10",
+    "python-dateutil>=2.9",
+    # Reliability / observability
+    "tenacity>=9.0",
+    "structlog>=24.4",
+]
+
+[project.scripts]
+asset-agent = "app.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3",
+    "pytest-asyncio>=0.24",
+    "httpx>=0.27",
+    "ruff>=0.7",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+# B008: Depends() in defaults is the idiomatic FastAPI pattern.
+# UP042: `str, Enum` is intentional (broad compatibility, identical JSON behavior).
+ignore = ["E501", "B008", "UP042"]

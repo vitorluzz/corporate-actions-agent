@@ -1,0 +1,45 @@
+[
+  {
+    "document": "04_rede_varejo_jcp_sem_data.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "JCP",
+    "golden_match": "EXACT",
+    "dq_score": 0.9161,
+    "reasons": [
+      "campos obrigatórios ausentes"
+    ],
+    "required_human_actions": [
+      "preencher campos: data_pagamento"
+    ]
+  },
+  {
+    "document": "05_aurora_saneamento_dividendo_datas.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "DIVIDENDO",
+    "golden_match": "EXACT",
+    "dq_score": 0.8651,
+    "reasons": [
+      "falha de coerência: date_order — data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: date_order"
+    ]
+  },
+  {
+    "document": "07_telecom_norte_jcp_SCAN.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "JCP",
+    "golden_match": "EXACT",
+    "dq_score": 0.7976,
+    "reasons": [
+      "falha de coerência: groundedness — valores sem âncora na fonte (possível alucinação): data_aprovacao, data_com, data_ex, data_pagamento, moeda",
+      "campos de baixa confiança: data_com",
+      "documento escaneado — extração por visão; conferir a leitura"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: groundedness",
+      "revisar campos: data_com",
+      "validar valores contra a imagem"
+    ]
+  }
+]

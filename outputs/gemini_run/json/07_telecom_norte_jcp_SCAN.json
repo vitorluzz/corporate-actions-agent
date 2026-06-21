@@ -1,0 +1,467 @@
+{
+  "document": {
+    "id": "07_telecom_norte_jcp_SCAN",
+    "source_file": "07_telecom_norte_jcp_SCAN.pdf",
+    "pages": 1,
+    "doc_class": "SCANNED",
+    "extraction_method": "gemini_vision",
+    "model": "gemini-2.5-flash",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "d69a17b5281c",
+    "doc_hash": "cf4af08dd23f507a"
+  },
+  "record": {
+    "emissor": "TELECOM NORTE PARTICIPAÇÕES S.A.",
+    "cnpj": "33.222.111/0001-44",
+    "isin": "BRTLNRACNPR2",
+    "ticker": "TLNR4",
+    "tipo_evento": "JCP",
+    "data_aprovacao": "2026-06-06",
+    "data_com": "2026-06-22",
+    "data_ex": "2026-06-23",
+    "data_pagamento": "2026-08-21",
+    "valor": null,
+    "valor_bruto": "0.1124300000",
+    "valor_liquido": "0.0927547500",
+    "irrf_rate": null,
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "JCP": 1.0
+    },
+    "argmax": "JCP",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 3
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "33.222.111/0001-44",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "CNPJ/ME nº 33.222.111/0001-44",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-06",
+      "confidence": {
+        "p_correct": 0.7214285714285714,
+        "p_uncertain": 0.0,
+        "p_error": 0.2785714285714286
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "reunião realizada em 06 de junho de 2026",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.5714
+      },
+      "grounded": false,
+      "rationale": "concordância 100% em 3 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-22",
+      "confidence": {
+        "p_correct": 0.67,
+        "p_uncertain": 0.0,
+        "p_error": 0.3299999999999999
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "ao final do dia 22 de junho de 2026 (data com).",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.4
+      },
+      "grounded": false,
+      "rationale": "concordância 100% em 3 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-23",
+      "confidence": {
+        "p_correct": 0.7100000000000001,
+        "p_uncertain": 0.0,
+        "p_error": 0.2899999999999999
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "negociadas ex-JCP a partir de 23 de junho de 2026.",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.5333
+      },
+      "grounded": false,
+      "rationale": "concordância 100% em 3 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-08-21",
+      "confidence": {
+        "p_correct": 0.7214285714285714,
+        "p_uncertain": 0.0,
+        "p_error": 0.2785714285714286
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "Data de pagamento ............ 21/08/2026",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.5714
+      },
+      "grounded": false,
+      "rationale": "concordância 100% em 3 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "TELECOM NORTE PARTICIPAÇÕES S.A.",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "TELECOM NORTE PARTICIPAÇÕES S.A.",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRTLNRACNPR2",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "ISIN BRTLNRACNPR2",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.7000000000000001,
+        "p_uncertain": 0.0,
+        "p_error": 0.29999999999999993
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "R$",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.5
+      },
+      "grounded": false,
+      "rationale": "concordância 100% em 3 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "TLNR4",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "TLNR4",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "Tipo de evento ................. Juros sobre o Capital Próprio (JCP)",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.1124300000",
+      "confidence": {
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "Valor bruto por ação PN ,,,,,,,,, R$ 0,1124300000",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.9167
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.0927547500",
+      "confidence": {
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
+      },
+      "evidence": {
+        "source": "VISION",
+        "quote": "Valor líquido por ação PN ,,,,,,,,, R$ 0,0927547500",
+        "page": 1,
+        "bbox": null,
+        "char_span": null,
+        "match_score": 0.9167
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 3 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Telecom Norte Participações S.A. (TLNR4).",
+      "golden_emissor": "Telecom Norte Participações S.A.",
+      "golden_isin": "BRTLNRACNPR2",
+      "golden_ticker": "TLNR4"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe PN",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "retenção implícita 17.50% compatível com IRRF de JCP (alíquota não informada no aviso)",
+        "fields": [
+          "valor_bruto",
+          "valor_liquido"
+        ]
+      },
+      {
+        "name": "groundedness",
+        "status": "FAIL",
+        "severity": "CRITICAL",
+        "message": "valores sem âncora na fonte (possível alucinação): data_aprovacao, data_com, data_ex, data_pagamento, moeda",
+        "fields": [
+          "data_aprovacao",
+          "data_com",
+          "data_ex",
+          "data_pagamento",
+          "moeda"
+        ]
+      }
+    ],
+    "dq_score": {
+      "score": 0.7976,
+      "components": {
+        "guardrails": 0.6667,
+        "groundedness": 0.5833,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.8727
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "falha de coerência: groundedness — valores sem âncora na fonte (possível alucinação): data_aprovacao, data_com, data_ex, data_pagamento, moeda",
+      "campos de baixa confiança: data_com",
+      "documento escaneado — extração por visão; conferir a leitura"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: groundedness",
+      "revisar campos: data_com",
+      "validar valores contra a imagem"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:15:14.535302Z",
+    "sampling": {
+      "n": 3,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRTLNRACNPR2",
+          "ticker": "TLNR4"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Telecom Norte Participações S.A. (TLNR4)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe PN"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "PASS — retenção implícita 17.50% compatível com IRRF de JCP (alíquota não informada no aviso)"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "FAIL — valores sem âncora na fonte (possível alucinação): data_aprovacao, data_com, data_ex, data_pagamento, moeda"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:gemini:gemini-2.5-flash"
+    }
+  }
+}

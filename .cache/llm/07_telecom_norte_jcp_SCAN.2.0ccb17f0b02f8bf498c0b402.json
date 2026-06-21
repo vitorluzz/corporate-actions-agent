@@ -1,0 +1,118 @@
+{
+  "event_type": "JCP",
+  "event_type_rationale": "O aviso é explicitamente intitulado 'Juros sobre o Capital Próprio (JCP)' e o campo 'Tipo de evento' também confirma 'Juros sobre o Capital Próprio (JCP)'.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "TELECOM NORTE PARTICIPAÇÕES S.A.",
+      "quote": "TELECOM NORTE PARTICIPAÇÕES S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia no cabeçalho do aviso."
+    },
+    {
+      "name": "cnpj",
+      "value": "33.222.111/0001-44",
+      "quote": "CNPJ/ME nº 33.222.111/0001-44",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "CNPJ da companhia conforme indicado no cabeçalho."
+    },
+    {
+      "name": "isin",
+      "value": "BRTLNRACNPR2",
+      "quote": "(ISIN BRTLNRACNPR2)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN fornecido junto ao código de negociação."
+    },
+    {
+      "name": "ticker",
+      "value": "TLNR4",
+      "quote": "TLNR4",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) fornecido no campo 'Código de negociação'."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "quote": "Tipo de evento ................. Juros sobre o Capital Próprio (JCP)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Tipo de evento' explicitamente preenchido no documento."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-06",
+      "quote": "em reunião realizada em 06 de junho de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data da reunião em que o crédito de JCP foi aprovado."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-22",
+      "quote": "Data-base (data com) ............ 22/06/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Data-base (data com)' explicitamente preenchido."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-23",
+      "quote": "Data ex-JCP ..................... 23/06/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Data ex-JCP' explicitamente preenchido."
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-08-21",
+      "quote": "Data de pagamento ............... 21/08/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Data de pagamento' explicitamente preenchido."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "O documento fornece valores brutos e líquidos separadamente, não um valor genérico único."
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.1124300000",
+      "quote": "Valor bruto por ação PN ........... R$ 0,1124300000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Valor bruto por ação PN' explicitamente preenchido."
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.0927547500",
+      "quote": "Valor líquido por ação PN .......... R$ 0,0927547500",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Campo 'Valor líquido por ação PN' explicitamente preenchido."
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Este campo não se aplica a Juros sobre Capital Próprio e não foi encontrado no documento."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "O símbolo 'R$' precede os valores monetários, indicando Real Brasileiro."
+    }
+  ]
+}

@@ -1,0 +1,449 @@
+{
+  "document": {
+    "id": "08_construtora_horizonte_bonificacao",
+    "source_file": "08_construtora_horizonte_bonificacao.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "heuristic-label-parser-v1",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "5451aa15fe8e",
+    "doc_hash": "a509637f4b258454"
+  },
+  "record": {
+    "emissor": "CONSTRUTORA HORIZONTE S.A.",
+    "cnpj": "09.888.999/0001-21",
+    "isin": "BRCNHZACNOR5",
+    "ticker": "CNHZ3",
+    "tipo_evento": "BONIFICACAO",
+    "data_aprovacao": null,
+    "data_com": "2026-06-18",
+    "data_ex": "2026-06-19",
+    "data_pagamento": null,
+    "valor": null,
+    "valor_bruto": null,
+    "valor_liquido": null,
+    "irrf_rate": null,
+    "proporcao": "5%",
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "BONIFICACAO": 1.0
+    },
+    "argmax": "BONIFICACAO",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 5
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "09.888.999/0001-21",
+      "confidence": {
+        "p_correct": 0.9840000000000001,
+        "p_uncertain": 0.015999999999999903,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "09.888.999/0001-21",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          57,
+          75
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "18/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "18/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 366.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 380.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          992,
+          1002
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "19/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "19/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 387.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 401.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1025,
+          1035
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "CONSTRUTORA HORIZONTE S.A.",
+      "confidence": {
+        "p_correct": 0.93,
+        "p_uncertain": 0.06999999999999995,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "CONSTRUTORA HORIZONTE S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 192.55230712890625,
+          "y0": 56.11368179321289,
+          "x1": 402.7232971191406,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          26
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRCNHZACNOR5",
+      "confidence": {
+        "p_correct": 0.9900000000000001,
+        "p_uncertain": 0.009999999999999898,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BRCNHZACNOR5",
+        "page": 1,
+        "bbox": {
+          "x0": 300.1109313964844,
+          "y0": 429.273681640625,
+          "x1": 386.7709045410156,
+          "y1": 443.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1110,
+          1122
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.86,
+        "p_uncertain": 0.052500000000000005,
+        "p_error": 0.08750000000000001
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$",
+        "page": 1,
+        "bbox": {
+          "x0": 372.8880615234375,
+          "y0": 152.273681640625,
+          "x1": 424.56805419921875,
+          "y1": 166.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          210,
+          213
+        ],
+        "match_score": 0.6667
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": "5%",
+      "confidence": {
+        "p_correct": 0.9400000000000001,
+        "p_uncertain": 0.05999999999999994,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "5%",
+        "page": 1,
+        "bbox": {
+          "x0": 386.3109130859375,
+          "y0": 324.273681640625,
+          "x1": 407.4208679199219,
+          "y1": 338.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          914,
+          916
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "CNHZ3",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "CNHZ3",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 429.273681640625,
+          "x1": 271.7709045410156,
+          "y1": 443.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1098,
+          1103
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Bonificação em ações",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Bonificação em ações",
+        "page": 1,
+        "bbox": {
+          "x0": 313.5218200683594,
+          "y0": 130.25367736816406,
+          "x1": 430.891845703125,
+          "y1": 145.4006805419922,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          121,
+          141
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "NONE",
+      "matched_on": [],
+      "discrepancies": [],
+      "explanation": "Nenhum identificador (ISIN/ticker/CNPJ/emissor) encontrado na base de referência — emissor desconhecido. Requer cadastro/validação humana.",
+      "golden_emissor": null,
+      "golden_isin": null,
+      "golden_ticker": null
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "dígito verificador OK",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe ON",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "não é JCP",
+        "fields": []
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.8167,
+      "components": {
+        "guardrails": 0.9444,
+        "groundedness": 1.0,
+        "identity": 0.2,
+        "type_confidence": 1.0,
+        "field_confidence": 0.956
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "emissor desconhecido (fora da base de referência)"
+    ],
+    "required_human_actions": [
+      "cadastrar/validar o emissor na base de referência"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:17:45.507280Z",
+    "sampling": {
+      "n": 5,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRCNHZACNOR5",
+          "ticker": "CNHZ3"
+        },
+        "result_summary": "NONE: Nenhum identificador (ISIN/ticker/CNPJ/emissor) encontrado na base de referência — emissor desconhecido. Requer cadastro/validação humana."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "PASS — dígito verificador OK"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe ON"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "NA — não é JCP"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:stub:heuristic-label-parser-v1"
+    }
+  }
+}

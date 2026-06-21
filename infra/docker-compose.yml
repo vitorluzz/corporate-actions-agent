@@ -1,0 +1,52 @@
+# Full stack: Postgres (system of record) + API (FastAPI) + web (CAA console).
+#   docker compose -f infra/docker-compose.yml up --build
+# Default runs offline (stub). For Gemini: export GOOGLE_API_KEY before `up`.
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: asset_pg
+    environment:
+      POSTGRES_USER: asset
+      POSTGRES_PASSWORD: asset
+      POSTGRES_DB: asset_servicing
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U asset -d asset_servicing"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.api
+    container_name: asset_api
+    environment:
+      DATABASE_URL: postgresql+psycopg://asset:asset@postgres:5432/asset_servicing
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY:-}
+      LLM_PROVIDER: ${LLM_PROVIDER:-auto}
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - uploads:/app/uploads
+      - ../outputs:/app/outputs
+
+  web:
+    build:
+      context: ..
+      dockerfile: infra/Dockerfile.web
+    container_name: asset_web
+    ports:
+      - "5173:5173"
+    depends_on:
+      - api
+
+volumes:
+  pgdata:
+  uploads:

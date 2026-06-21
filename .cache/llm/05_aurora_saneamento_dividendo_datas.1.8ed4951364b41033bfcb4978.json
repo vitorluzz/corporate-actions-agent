@@ -1,0 +1,94 @@
+{
+  "event_type": "DIVIDENDO",
+  "event_type_rationale": "palavra-chave 'dividendo'",
+  "fields": [
+    {
+      "name": "tipo_evento",
+      "value": "Dividendo intercalar",
+      "quote": "Dividendo intercalar",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "palavra-chave 'dividendo'"
+    },
+    {
+      "name": "isin",
+      "value": "BRAURSACNOR4",
+      "quote": "BRAURSACNOR4",
+      "page": null,
+      "confidence": 0.95,
+      "rationale": "padrão isin"
+    },
+    {
+      "name": "ticker",
+      "value": "AURS3",
+      "quote": "AURS3",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "padrão ticker"
+    },
+    {
+      "name": "cnpj",
+      "value": "22.333.444/0001-77",
+      "quote": "22.333.444/0001-77",
+      "page": null,
+      "confidence": 0.92,
+      "rationale": "padrão cnpj"
+    },
+    {
+      "name": "emissor",
+      "value": "AURORA SANEAMENTO S.A.",
+      "quote": "AURORA SANEAMENTO S.A.",
+      "page": null,
+      "confidence": 0.65,
+      "rationale": "primeira linha (cabeçalho)"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "01/06/2026",
+      "quote": "01/06/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_aprovacao)"
+    },
+    {
+      "name": "data_com",
+      "value": "15/07/2026",
+      "quote": "15/07/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_com)"
+    },
+    {
+      "name": "data_ex",
+      "value": "16/07/2026",
+      "quote": "16/07/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_ex)"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "10/07/2026",
+      "quote": "10/07/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_pagamento)"
+    },
+    {
+      "name": "valor",
+      "value": "R$ 0,3100000000",
+      "quote": "R$ 0,3100000000",
+      "page": null,
+      "confidence": 0.85,
+      "rationale": "valor bruto rotulado"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": null,
+      "confidence": 0.8,
+      "rationale": "moeda BRL (R$)"
+    }
+  ]
+}

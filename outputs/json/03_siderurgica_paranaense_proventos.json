@@ -1,0 +1,485 @@
+{
+  "document": {
+    "id": "03_siderurgica_paranaense_proventos",
+    "source_file": "03_siderurgica_paranaense_proventos.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "heuristic-label-parser-v1",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "5451aa15fe8e",
+    "doc_hash": "a21a294ac3ededbb"
+  },
+  "record": {
+    "emissor": "COMPANHIA SIDERÚRGICA PARANAENSE S.A.",
+    "cnpj": "76.543.210/0001-12",
+    "isin": "BRCSPRACNOR1",
+    "ticker": "CSPR3",
+    "tipo_evento": "DIVIDENDO",
+    "data_aprovacao": null,
+    "data_com": "2026-06-19",
+    "data_ex": "2026-06-22",
+    "data_pagamento": "2026-09-11",
+    "valor": null,
+    "valor_bruto": "0.0921500000",
+    "valor_liquido": "0.0760237500",
+    "irrf_rate": null,
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "DIVIDENDO": 1.0
+    },
+    "argmax": "DIVIDENDO",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 5
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "76.543.210/0001-12",
+      "confidence": {
+        "p_correct": 0.9840000000000001,
+        "p_uncertain": 0.015999999999999903,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "76.543.210/0001-12",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          68,
+          86
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "19/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "19/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 432.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 446.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1208,
+          1218
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "22/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "22/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 453.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 467.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1229,
+          1239
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "11/09/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "11/09/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 474.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 488.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1258,
+          1268
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "COMPANHIA SIDERÚRGICA PARANAENSE S.A.",
+      "confidence": {
+        "p_correct": 0.93,
+        "p_uncertain": 0.06999999999999995,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "COMPANHIA SIDERÚRGICA PARANAENSE S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 148.49530029296875,
+          "y0": 56.11368179321289,
+          "x1": 446.78021240234375,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          37
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRCSPRACNOR1",
+      "confidence": {
+        "p_correct": 0.9900000000000001,
+        "p_uncertain": 0.009999999999999898,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BRCSPRACNOR1",
+        "page": 1,
+        "bbox": {
+          "x0": 300.12091064453125,
+          "y0": 495.273681640625,
+          "x1": 386.7909240722656,
+          "y1": 509.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1302,
+          1314
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.86,
+        "p_uncertain": 0.052500000000000005,
+        "p_error": 0.08750000000000001
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$",
+        "page": 1,
+        "bbox": {
+          "x0": 117.74119567871094,
+          "y0": 220.273681640625,
+          "x1": 164.43118286132812,
+          "y1": 234.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          574,
+          577
+        ],
+        "match_score": 0.6667
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "CSPR3",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "CSPR3",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 495.273681640625,
+          "x1": 271.7809143066406,
+          "y1": 509.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1290,
+          1295
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "R$ 0,0921500000",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,0921500000",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 354.273681640625,
+          "x1": 317.94091796875,
+          "y1": 368.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1088,
+          1103
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": "R$ 0,0760237500",
+      "confidence": {
+        "p_correct": 0.8200000000000001,
+        "p_uncertain": 0.023478260869565216,
+        "p_error": 0.15652173913043474
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,0760237500",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 411.273681640625,
+          "x1": 317.94091796875,
+          "y1": 425.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1169,
+          1184
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Companhia Siderúrgica Paranaense S.A. (CSPR3).",
+      "golden_emissor": "Companhia Siderúrgica Paranaense S.A.",
+      "golden_isin": "BRCSPRACNOR1",
+      "golden_ticker": "CSPR3"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe ON",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "FAIL",
+        "severity": "CRITICAL",
+        "message": "classificado como dividendo, mas há retenção na fonte (líquido < bruto) — substância compatível com JCP; confirmar tipo e tratamento tributário",
+        "fields": [
+          "tipo_evento",
+          "valor_liquido"
+        ]
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "não é JCP",
+        "fields": []
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.8917,
+      "components": {
+        "guardrails": 0.6667,
+        "groundedness": 1.0,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.9444
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "falha de coerência: event_type_substance — classificado como dividendo, mas há retenção na fonte (líquido < bruto) — substância compatível com JCP; confirmar tipo e tratamento tributário"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: event_type_substance"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:17:44.986345Z",
+    "sampling": {
+      "n": 5,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRCSPRACNOR1",
+          "ticker": "CSPR3"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Companhia Siderúrgica Paranaense S.A. (CSPR3)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe ON"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "FAIL — classificado como dividendo, mas há retenção na fonte (líquido < bruto) — substância compatível com JCP; confirmar tipo e tratamento tributário"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "NA — não é JCP"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:stub:heuristic-label-parser-v1"
+    }
+  }
+}

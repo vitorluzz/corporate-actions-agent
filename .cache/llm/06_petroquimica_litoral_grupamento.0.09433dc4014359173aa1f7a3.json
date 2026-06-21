@@ -1,0 +1,118 @@
+{
+  "event_type": "GRUPAMENTO",
+  "event_type_rationale": "O aviso é explicitamente intitulado 'Grupamento de Ações (Inplit)' e o tipo de evento é confirmado como 'Grupamento de ações (inplit)' no corpo do texto.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "PETROQUÍMICA LITORAL S.A.",
+      "quote": "PETROQUÍMICA LITORAL S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia encontrado no cabeçalho do documento."
+    },
+    {
+      "name": "cnpj",
+      "value": "55.666.777/0001-08",
+      "quote": "CNPJ/ME nº 55.666.777/0001-08",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "CNPJ encontrado no cabeçalho do documento."
+    },
+    {
+      "name": "isin",
+      "value": "BRPQLTACNOR8",
+      "quote": "ISIN BRPQLTACNOR8",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN encontrado na seção de informações do ativo."
+    },
+    {
+      "name": "ticker",
+      "value": "PQLT3",
+      "quote": "PQLT3",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) encontrado na seção de informações do ativo."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Grupamento de ações (inplit)",
+      "quote": "Grupamento de ações (inplit)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "O tipo de evento é explicitamente declarado no aviso."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-05-30",
+      "quote": "Assembleia Geral Extraordinária realizada em 30 de maio de 2026 aprovou o grupamento",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data da Assembleia Geral Extraordinária que aprovou o grupamento."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-26",
+      "quote": "A posição acionária considerada para fins de grupamento será a do final do pregão de 26 de junho de 2026 (data-base do grupamento).",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "A data-base do grupamento é a data 'com' direito ao evento."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-29",
+      "quote": "A partir de 29 de junho de 2026, as ações passarão a ser negociadas já grupadas.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "A data em que as ações passam a ser negociadas grupadas é a data 'ex'."
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Grupamento de ações não envolve pagamento monetário, portanto, não há data de pagamento."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Grupamento de ações não envolve valor monetário por ação."
+    },
+    {
+      "name": "valor_bruto",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Grupamento de ações não envolve valor monetário por ação."
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Grupamento de ações não envolve valor monetário por ação."
+    },
+    {
+      "name": "proporcao",
+      "value": "10:1",
+      "quote": "na proporção de 10 (dez) ações existentes para 1 (uma) ação",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "A proporção do grupamento é claramente indicada no texto e resumida na seção 'Proporção'."
+    },
+    {
+      "name": "moeda",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Grupamento de ações não envolve valores monetários, portanto, não há moeda associada."
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "event_type": "JCP",
+  "event_type_rationale": "palavra-chave 'juros sobre o capital'",
+  "fields": [
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "quote": "Juros sobre o Capital Próprio (JCP)",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "palavra-chave 'juros sobre o capital'"
+    },
+    {
+      "name": "isin",
+      "value": "BRRVBRACNOR9",
+      "quote": "BRRVBRACNOR9",
+      "page": null,
+      "confidence": 0.95,
+      "rationale": "padrão isin"
+    },
+    {
+      "name": "ticker",
+      "value": "RVBR3",
+      "quote": "RVBR3",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "padrão ticker"
+    },
+    {
+      "name": "cnpj",
+      "value": "08.777.666/0001-33",
+      "quote": "08.777.666/0001-33",
+      "page": null,
+      "confidence": 0.92,
+      "rationale": "padrão cnpj"
+    },
+    {
+      "name": "emissor",
+      "value": "REDE VAREJO BRASIL S.A.",
+      "quote": "REDE VAREJO BRASIL S.A.",
+      "page": null,
+      "confidence": 0.65,
+      "rationale": "primeira linha (cabeçalho)"
+    },
+    {
+      "name": "data_com",
+      "value": "23/06/2026",
+      "quote": "23/06/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_com)"
+    },
+    {
+      "name": "data_ex",
+      "value": "24/06/2026",
+      "quote": "24/06/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_ex)"
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "quote": null,
+      "page": 1,
+      "confidence": 0.3,
+      "rationale": "rótulo presente, data não definida (ex.: 'A definir')"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "R$ 0,2050000000",
+      "quote": "R$ 0,2050000000",
+      "page": null,
+      "confidence": 0.85,
+      "rationale": "valor bruto rotulado"
+    },
+    {
+      "name": "valor_liquido",
+      "value": "R$ 0,1691250000",
+      "quote": "R$ 0,1691250000",
+      "page": null,
+      "confidence": 0.85,
+      "rationale": "valor líquido rotulado"
+    },
+    {
+      "name": "irrf",
+      "value": "17,5%",
+      "quote": "17,5%",
+      "page": null,
+      "confidence": 0.85,
+      "rationale": "alíquota IRRF rotulada"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": null,
+      "confidence": 0.8,
+      "rationale": "moeda BRL (R$)"
+    }
+  ]
+}

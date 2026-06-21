@@ -1,0 +1,118 @@
+{
+  "event_type": "JCP",
+  "event_type_rationale": "O aviso menciona explicitamente 'Juros sobre o Capital Próprio (JCP)' no título e no corpo do texto, além de detalhar valores brutos e líquidos com retenção de IRRF, características típicas de JCP.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "REDE VAREJO BRASIL S.A.",
+      "quote": "REDE VAREJO BRASIL S.A.",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia no cabeçalho do documento."
+    },
+    {
+      "name": "cnpj",
+      "value": "08.777.666/0001-33",
+      "quote": "CNPJ/ME nº 08.777.666/0001-33",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "CNPJ da companhia conforme indicado no cabeçalho."
+    },
+    {
+      "name": "isin",
+      "value": "BRRVBRACNOR9",
+      "quote": "ISIN BRRVBRACNOR9",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Código ISIN explicitamente mencionado junto ao código de negociação."
+    },
+    {
+      "name": "ticker",
+      "value": "RVBR3",
+      "quote": "RVBR3",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) da ação."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "quote": "Tipo de evento Juros sobre o Capital Próprio (JCP)",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Campo 'Tipo de evento' explicitamente declarado no documento."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-09",
+      "quote": "Conselho de Administração, em reunião realizada em 09 de junho de 2026, aprovou o pagamento de Juros sobre o Capital Próprio (JCP)",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Data da reunião do Conselho de Administração que aprovou o pagamento."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-23",
+      "quote": "Farão jus ao provento os acionistas titulares de ações ao final do dia 23 de junho de 2026 (“data com”)",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Data-base ('data com') para ter direito ao provento."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-24",
+      "quote": "negociando-se as ações “ex-JCP” a partir de 24 de junho de 2026.",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Data a partir da qual as ações serão negociadas 'ex-JCP'."
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "quote": "A data de pagamento será oportunamente definida e divulgada por meio de Aviso aos Acionistas complementar, após a conclusão dos procedimentos operacionais junto à instituição depositária. A Companhia recomenda aos acionistas o acompanhamento de seus canais oficiais de divulgação.",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "O documento afirma que a data de pagamento será definida e divulgada posteriormente, não fornecendo uma data específica neste aviso."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Para JCP, os campos 'valor_bruto' e 'valor_liquido' são mais específicos e foram extraídos. O campo 'valor' genérico não é aplicável neste contexto."
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.2050000000",
+      "quote": "R$ 0,2050000000",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Valor bruto por ação ON explicitamente declarado."
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.1691250000",
+      "quote": "R$ 0,1691250000",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "Valor líquido por ação ON explicitamente declarado."
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Este campo é aplicável para eventos como bonificação, grupamento ou desdobramento, não para Juros sobre Capital Próprio."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": 1,
+      "confidence": 1.0,
+      "rationale": "O símbolo 'R$' indica a moeda Real Brasileiro."
+    }
+  ]
+}

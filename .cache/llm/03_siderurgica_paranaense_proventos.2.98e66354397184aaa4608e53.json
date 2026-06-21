@@ -1,0 +1,118 @@
+{
+  "event_type": "JCP",
+  "event_type_rationale": "O aviso menciona \"remuneração do capital próprio\" e \"retenção de Imposto de Renda na Fonte à alíquota de 17,5%\", características de Juros Sobre Capital Próprio (JCP), apesar do título inicial mencionar \"Distribuição de Dividendos\". A tabela de proventos também confirma \"Remuneração do capital próprio\".",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "COMPANHIA SIDERÚRGICA PARANAENSE S.A.",
+      "quote": "COMPANHIA SIDERÚRGICA PARANAENSE S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia extraído do cabeçalho do aviso."
+    },
+    {
+      "name": "cnpj",
+      "value": "76.543.210/0001-12",
+      "quote": "CNPJ/ME nº 76.543.210/0001-12",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Número de CNPJ extraído do cabeçalho do aviso."
+    },
+    {
+      "name": "isin",
+      "value": "BRCSPRACNOR1",
+      "quote": "BRCSPRACNOR1",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN extraído da seção de código de negociação."
+    },
+    {
+      "name": "ticker",
+      "value": "CSPR3",
+      "quote": "CSPR3",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) extraído da seção de código de negociação."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Remuneração do capital próprio",
+      "quote": "Remuneração do capital próprio",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Tipo de provento explicitamente declarado na tabela de proventos."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-05",
+      "quote": "reunião de 05 de junho de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data da reunião do Conselho de Administração que aprovou a distribuição."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-19",
+      "quote": "19 de junho de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'com' extraída da frase 'Terão direito os acionistas detentores de ações ao final do pregão de 19 de junho de 2026' e confirmada na tabela como 'Data-base (“data com”) 19/06/2026'."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-22",
+      "quote": "22 de junho de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'ex' extraída da frase 'negociando-se as ações “ex” a partir de 22 de junho de 2026' e confirmada na tabela como 'Data “ex” 22/06/2026'."
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-09-11",
+      "quote": "11/09/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data de pagamento explicitamente declarada na tabela de proventos."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "Para JCP, são fornecidos valores bruto e líquido, tornando o campo 'valor' genérico desnecessário e potencialmente ambíguo. Portanto, é retornado como nulo."
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.0921500000",
+      "quote": "R$ 0,0921500000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Valor bruto por ação ON explicitamente declarado na tabela de proventos."
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.0760237500",
+      "quote": "R$ 0,0760237500",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Valor líquido por ação ON explicitamente declarado na tabela de proventos."
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Não há menção de proporção no documento, pois não se trata de bonificação, grupamento ou desdobramento."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "A moeda é indicada pelo símbolo 'R$' nos valores por ação."
+    }
+  ]
+}

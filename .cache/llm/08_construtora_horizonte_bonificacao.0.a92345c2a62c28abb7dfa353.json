@@ -1,0 +1,126 @@
+{
+  "event_type": "BONIFICACAO",
+  "event_type_rationale": "O documento explicitamente menciona 'Bonificação em Ações' no título e na seção 'Tipo de evento', indicando claramente que se trata de uma bonificação.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "CONSTRUTORA HORIZONTE S.A.",
+      "quote": "CONSTRUTORA HORIZONTE S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia no cabeçalho."
+    },
+    {
+      "name": "cnpj",
+      "value": "09.888.999/0001-21",
+      "quote": "CNPJ/ME nº 09.888.999/0001-21",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "CNPJ da companhia no cabeçalho."
+    },
+    {
+      "name": "isin",
+      "value": "BRCNHZACNOR5",
+      "quote": "ISIN BRCNHZACNOR5",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN encontrado na seção 'Código de negociação'."
+    },
+    {
+      "name": "ticker",
+      "value": "CNHZ3",
+      "quote": "CNHZ3 (ISIN BRCNHZACNOR5)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) encontrado na seção 'Código de negociação'."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Bonificação em ações",
+      "quote": "Tipo de evento Bonificação em ações",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "O tipo de evento é explicitamente declarado no documento."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-04",
+      "quote": "Assembleia Geral Extraordinária de 04 de junho de 2026 aprovou",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data da Assembleia Geral Extraordinária que aprovou a bonificação."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-18",
+      "quote": "ao final do dia 18 de junho de 2026 (“data com”)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'com' explicitamente mencionada no texto e na seção 'Data-base'."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-19",
+      "quote": "As ações passarão a ser negociadas “ex-bonificação” a partir de 19 de junho de 2026.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'ex-bonificação' explicitamente mencionada no texto e na seção 'Data “ex-bonificação”'."
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-06-26",
+      "quote": "Crédito das ações bonificadas 26/06/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data de crédito das ações bonificadas, que funciona como a data de pagamento/disponibilização."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Bonificação em ações não possui um 'valor' monetário direto por ação distribuída, mas sim uma proporção. O valor de R$ 7,820000 é um custo atribuído para fins fiscais, não um provento em dinheiro."
+    },
+    {
+      "name": "valor_bruto",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Não aplicável para bonificação em ações."
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Não aplicável para bonificação em ações."
+    },
+    {
+      "name": "irrf",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Não aplicável para bonificação em ações."
+    },
+    {
+      "name": "proporcao",
+      "value": "1 ação nova para cada 20 ações",
+      "quote": "A bonificação será atribuída na proporção de 1 (uma) ação nova para cada 20 (vinte) ações",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Proporção da bonificação explicitamente mencionada no texto e na seção 'Proporção'."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$ 7,820000 por ação",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "A moeda é inferida pelo símbolo 'R$' no custo atribuído para fins fiscais, que é a moeda padrão brasileira."
+    }
+  ]
+}

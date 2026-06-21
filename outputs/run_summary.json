@@ -1,0 +1,25 @@
+{
+  "run_id": "5451aa15fe8e",
+  "created_at": "2026-06-21T16:17:45.507414Z",
+  "total": 8,
+  "auto_approved": 3,
+  "review": 5,
+  "rejected": 0,
+  "auto_rate": 0.375,
+  "avg_confidence": 0.9493,
+  "type_mix": {
+    "DIVIDENDO": 3,
+    "JCP": 2,
+    "GRUPAMENTO": 1,
+    "INCERTO": 1,
+    "BONIFICACAO": 1
+  },
+  "flag_reasons_histogram": {
+    "falha de coerência": 2,
+    "campos obrigatórios ausentes": 2,
+    "tipo de evento ambíguo/genérico": 1,
+    "documento escaneado não pôde ser lido automaticamente": 1,
+    "Data Quality abaixo do limiar": 1,
+    "emissor desconhecido": 1
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "event_type": "BONIFICACAO",
+  "event_type_rationale": "palavra-chave 'bonificação'",
+  "fields": [
+    {
+      "name": "tipo_evento",
+      "value": "Bonificação em ações",
+      "quote": "Bonificação em ações",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "palavra-chave 'bonificação'"
+    },
+    {
+      "name": "isin",
+      "value": "BRCNHZACNOR5",
+      "quote": "BRCNHZACNOR5",
+      "page": null,
+      "confidence": 0.95,
+      "rationale": "padrão isin"
+    },
+    {
+      "name": "ticker",
+      "value": "CNHZ3",
+      "quote": "CNHZ3",
+      "page": null,
+      "confidence": 0.9,
+      "rationale": "padrão ticker"
+    },
+    {
+      "name": "cnpj",
+      "value": "09.888.999/0001-21",
+      "quote": "09.888.999/0001-21",
+      "page": null,
+      "confidence": 0.92,
+      "rationale": "padrão cnpj"
+    },
+    {
+      "name": "emissor",
+      "value": "CONSTRUTORA HORIZONTE S.A.",
+      "quote": "CONSTRUTORA HORIZONTE S.A.",
+      "page": null,
+      "confidence": 0.65,
+      "rationale": "primeira linha (cabeçalho)"
+    },
+    {
+      "name": "data_com",
+      "value": "18/06/2026",
+      "quote": "18/06/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_com)"
+    },
+    {
+      "name": "data_ex",
+      "value": "19/06/2026",
+      "quote": "19/06/2026",
+      "page": 1,
+      "confidence": 0.85,
+      "rationale": "data rotulada (data_ex)"
+    },
+    {
+      "name": "proporcao",
+      "value": "5%",
+      "quote": "5%",
+      "page": null,
+      "confidence": 0.7,
+      "rationale": "proporção/razão de ações"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$",
+      "page": null,
+      "confidence": 0.8,
+      "rationale": "moeda BRL (R$)"
+    }
+  ]
+}

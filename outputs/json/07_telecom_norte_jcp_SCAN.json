@@ -1,0 +1,199 @@
+{
+  "document": {
+    "id": "07_telecom_norte_jcp_SCAN",
+    "source_file": "07_telecom_norte_jcp_SCAN.pdf",
+    "pages": 1,
+    "doc_class": "SCANNED",
+    "extraction_method": "gemini_vision",
+    "model": "heuristic-label-parser-v1",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "5451aa15fe8e",
+    "doc_hash": "cf4af08dd23f507a"
+  },
+  "record": {
+    "emissor": null,
+    "cnpj": null,
+    "isin": null,
+    "ticker": null,
+    "tipo_evento": "INCERTO",
+    "data_aprovacao": null,
+    "data_com": null,
+    "data_ex": null,
+    "data_pagamento": null,
+    "valor": null,
+    "valor_bruto": null,
+    "valor_liquido": null,
+    "irrf_rate": null,
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "INCERTO": 1.0
+    },
+    "argmax": "INCERTO",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 5
+  },
+  "fields": [],
+  "validation": {
+    "golden_match": {
+      "status": "NONE",
+      "matched_on": [],
+      "discrepancies": [],
+      "explanation": "Nenhum identificador (ISIN/ticker/CNPJ/emissor) encontrado na base de referência — emissor desconhecido. Requer cadastro/validação humana.",
+      "golden_emissor": null,
+      "golden_isin": null,
+      "golden_ticker": null
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem ISIN",
+        "fields": []
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem CNPJ",
+        "fields": []
+      },
+      {
+        "name": "ticker_class",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem ticker",
+        "fields": []
+      },
+      {
+        "name": "required_fields",
+        "status": "FAIL",
+        "severity": "WARNING",
+        "message": "campos obrigatórios ausentes: emissor, isin, ticker",
+        "fields": [
+          "emissor",
+          "isin",
+          "ticker"
+        ]
+      },
+      {
+        "name": "date_order",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "datas insuficientes para checar ordem",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "não é JCP",
+        "fields": []
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.54,
+      "components": {
+        "guardrails": 0.5,
+        "groundedness": 1.0,
+        "identity": 0.2,
+        "type_confidence": 1.0,
+        "field_confidence": 0.0
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "tipo de evento ambíguo/genérico (INCERTO)",
+      "campos obrigatórios ausentes",
+      "documento escaneado não pôde ser lido automaticamente (sem camada de texto; requer visão/OCR ou leitura humana)",
+      "Data Quality abaixo do limiar (0.54 < 0.75)"
+    ],
+    "required_human_actions": [
+      "classificar o tipo de evento manualmente",
+      "preencher campos: emissor, isin, ticker",
+      "ler o documento manualmente ou reprocessar com visão (Gemini)"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:17:45.502188Z",
+    "sampling": {
+      "n": 5,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": null,
+          "ticker": null
+        },
+        "result_summary": "NONE: Nenhum identificador (ISIN/ticker/CNPJ/emissor) encontrado na base de referência — emissor desconhecido. Requer cadastro/validação humana."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "NA — sem ISIN"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "NA — sem CNPJ"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "NA — sem ticker"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "FAIL — campos obrigatórios ausentes: emissor, isin, ticker"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "NA — datas insuficientes para checar ordem"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "NA — não é JCP"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:stub:heuristic-label-parser-v1"
+    }
+  }
+}

@@ -1,0 +1,515 @@
+{
+  "document": {
+    "id": "05_aurora_saneamento_dividendo_datas",
+    "source_file": "05_aurora_saneamento_dividendo_datas.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "heuristic-label-parser-v1",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "5451aa15fe8e",
+    "doc_hash": "925b6eb09fbcaecf"
+  },
+  "record": {
+    "emissor": "AURORA SANEAMENTO S.A.",
+    "cnpj": "22.333.444/0001-77",
+    "isin": "BRAURSACNOR4",
+    "ticker": "AURS3",
+    "tipo_evento": "DIVIDENDO",
+    "data_aprovacao": "2026-06-01",
+    "data_com": "2026-07-15",
+    "data_ex": "2026-07-16",
+    "data_pagamento": "2026-07-10",
+    "valor": "0.3100000000",
+    "valor_bruto": null,
+    "valor_liquido": null,
+    "irrf_rate": null,
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "DIVIDENDO": 1.0
+    },
+    "argmax": "DIVIDENDO",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 5
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "22.333.444/0001-77",
+      "confidence": {
+        "p_correct": 0.9840000000000001,
+        "p_uncertain": 0.015999999999999903,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "22.333.444/0001-77",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          53,
+          71
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "01/06/2026",
+      "confidence": {
+        "p_correct": 0.8200000000000001,
+        "p_uncertain": 0.023478260869565216,
+        "p_error": 0.15652173913043474
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "01/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 315.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 329.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          775,
+          785
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "15/07/2026",
+      "confidence": {
+        "p_correct": 0.8200000000000001,
+        "p_uncertain": 0.023478260869565216,
+        "p_error": 0.15652173913043474
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "15/07/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 336.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 350.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          809,
+          819
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "16/07/2026",
+      "confidence": {
+        "p_correct": 0.8200000000000001,
+        "p_uncertain": 0.023478260869565216,
+        "p_error": 0.15652173913043474
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "16/07/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 357.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 371.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          841,
+          851
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "10/07/2026",
+      "confidence": {
+        "p_correct": 0.8200000000000001,
+        "p_uncertain": 0.023478260869565216,
+        "p_error": 0.15652173913043474
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "10/07/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 378.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 392.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          870,
+          880
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "AURORA SANEAMENTO S.A.",
+      "confidence": {
+        "p_correct": 0.93,
+        "p_uncertain": 0.06999999999999995,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "AURORA SANEAMENTO S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 206.6378173828125,
+          "y0": 56.11368179321289,
+          "x1": 388.6378173828125,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          22
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRAURSACNOR4",
+      "confidence": {
+        "p_correct": 0.9900000000000001,
+        "p_uncertain": 0.009999999999999898,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BRAURSACNOR4",
+        "page": 1,
+        "bbox": {
+          "x0": 300.12091064453125,
+          "y0": 399.273681640625,
+          "x1": 386.7909240722656,
+          "y1": 413.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          914,
+          926
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.86,
+        "p_uncertain": 0.052500000000000005,
+        "p_error": 0.08750000000000001
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$",
+        "page": 1,
+        "bbox": {
+          "x0": 300.12091064453125,
+          "y0": 399.273681640625,
+          "x1": 386.7909240722656,
+          "y1": 413.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          913,
+          916
+        ],
+        "match_score": 0.6667
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "AURS3",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "AURS3",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 399.273681640625,
+          "x1": 271.7809143066406,
+          "y1": 413.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          902,
+          907
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Dividendo intercalar",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Dividendo intercalar",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 273.273681640625,
+          "x1": 326.8009033203125,
+          "y1": 287.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          690,
+          710
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": "R$ 0,3100000000",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,3100000000",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 294.273681640625,
+          "x1": 317.94091796875,
+          "y1": 308.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          735,
+          750
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Aurora Saneamento S.A. (AURS3).",
+      "golden_emissor": "Aurora Saneamento S.A.",
+      "golden_isin": "BRAURSACNOR4",
+      "golden_ticker": "AURS3"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe ON",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "FAIL",
+        "severity": "CRITICAL",
+        "message": "data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)",
+        "fields": [
+          "data_aprovacao",
+          "data_com",
+          "data_ex",
+          "data_pagamento"
+        ]
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "não é JCP",
+        "fields": []
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.866,
+      "components": {
+        "guardrails": 0.6,
+        "groundedness": 1.0,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.9067
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "falha de coerência: date_order — data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: date_order"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:17:44.999108Z",
+    "sampling": {
+      "n": 5,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRAURSACNOR4",
+          "ticker": "AURS3"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Aurora Saneamento S.A. (AURS3)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe ON"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "FAIL — data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "NA — não é JCP"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:stub:heuristic-label-parser-v1"
+    }
+  }
+}

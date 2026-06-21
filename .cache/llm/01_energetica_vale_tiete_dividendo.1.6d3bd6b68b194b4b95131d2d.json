@@ -1,0 +1,110 @@
+{
+  "event_type": "DIVIDENDO",
+  "event_type_rationale": "O documento explicitamente declara no título \"AVISO AOS ACIONISTAS — Pagamento de Dividendos\" e, em uma seção dedicada, \"Tipo de evento Dividendo\", confirmando a natureza do evento.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "ENERGÉTICA VALE DO TIETÊ S.A.",
+      "quote": "ENERGÉTICA VALE DO TIETÊ S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia extraído do cabeçalho do documento."
+    },
+    {
+      "name": "cnpj",
+      "value": "12.345.678/0001-90",
+      "quote": "CNPJ/ME nº 12.345.678/0001-90",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "CNPJ extraído do cabeçalho do documento."
+    },
+    {
+      "name": "isin",
+      "value": "BRTIETACNOR3",
+      "quote": "TIET3 (ISIN BRTIETACNOR3)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN explicitamente mencionado junto ao código de negociação."
+    },
+    {
+      "name": "ticker",
+      "value": "TIET3",
+      "quote": "Código de negociação TIET3",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) explicitamente mencionado."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-05-28",
+      "quote": "reunião realizada em 28 de maio de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data de aprovação do Conselho de Administração para a distribuição de dividendos."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-12",
+      "quote": "posição acionária final do dia 12 de junho de 2026 (data-base / “data com”)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data-base ou 'data com' para a posição acionária, explicitamente mencionada."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-15",
+      "quote": "negociadas “ex-dividendos” a partir de 15 de junho de 2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data a partir da qual as ações serão negociadas 'ex-dividendos', explicitamente mencionada."
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-07-03",
+      "quote": "Data de pagamento 03/07/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data de pagamento dos dividendos, explicitamente mencionada."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "O documento especifica apenas o 'Valor bruto por ação', não um 'valor' genérico ou líquido."
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.4275000000",
+      "quote": "R$ 0,4275000000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Valor bruto por ação ordinária explicitamente declarado no documento."
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "O documento menciona uma regra geral de retenção de IRRF para dividendos acima de R$ 50.000,00, mas não fornece um valor líquido específico para este provento após a aplicação dessa regra."
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Este evento é um pagamento de dividendos, não uma bonificação, grupamento ou desdobramento que envolva proporção."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$ 0,4275000000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "O símbolo 'R$' indica a moeda Real Brasileiro."
+    }
+  ]
+}

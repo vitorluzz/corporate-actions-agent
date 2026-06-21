@@ -1,0 +1,540 @@
+{
+  "document": {
+    "id": "02_banco_meridional_jcp",
+    "source_file": "02_banco_meridional_jcp.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "heuristic-label-parser-v1",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "5451aa15fe8e",
+    "doc_hash": "64e0787afd32c0d9"
+  },
+  "record": {
+    "emissor": "BANCO MERIDIONAL DO BRASIL S.A.",
+    "cnpj": "60.111.222/0001-55",
+    "isin": "BRBMRDACNPR7",
+    "ticker": "BMRD4",
+    "tipo_evento": "JCP",
+    "data_aprovacao": null,
+    "data_com": "2026-06-16",
+    "data_ex": "2026-06-17",
+    "data_pagamento": "2026-08-14",
+    "valor": null,
+    "valor_bruto": "0.1738420000",
+    "valor_liquido": "0.1434196500",
+    "irrf_rate": "0.175",
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "JCP": 1.0
+    },
+    "argmax": "JCP",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 5
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "60.111.222/0001-55",
+      "confidence": {
+        "p_correct": 0.9840000000000001,
+        "p_uncertain": 0.015999999999999903,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "60.111.222/0001-55",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          62,
+          80
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "16/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "16/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 417.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 431.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1182,
+          1192
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "17/06/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "17/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 438.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 452.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1207,
+          1217
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "14/08/2026",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "14/08/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 459.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 473.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1236,
+          1246
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "BANCO MERIDIONAL DO BRASIL S.A.",
+      "confidence": {
+        "p_correct": 0.93,
+        "p_uncertain": 0.06999999999999995,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BANCO MERIDIONAL DO BRASIL S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 178.830810546875,
+          "y0": 56.11368179321289,
+          "x1": 416.4447937011719,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          31
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": "17,5%",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "17,5%",
+        "page": 1,
+        "bbox": {
+          "x0": 314.7532958984375,
+          "y0": 235.273681640625,
+          "x1": 345.88330078125,
+          "y1": 249.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          658,
+          663
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRBMRDACNPR7",
+      "confidence": {
+        "p_correct": 0.9900000000000001,
+        "p_uncertain": 0.009999999999999898,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BRBMRDACNPR7",
+        "page": 1,
+        "bbox": {
+          "x0": 301.7809143066406,
+          "y0": 480.273681640625,
+          "x1": 389.00091552734375,
+          "y1": 494.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1280,
+          1292
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.86,
+        "p_uncertain": 0.052500000000000005,
+        "p_error": 0.08750000000000001
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$",
+        "page": 1,
+        "bbox": {
+          "x0": 312.0037841796875,
+          "y0": 130.25367736816406,
+          "x1": 341.9567565917969,
+          "y1": 145.4006805419922,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          133,
+          136
+        ],
+        "match_score": 0.6667
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "BMRD4",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "BMRD4",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 480.273681640625,
+          "x1": 273.44091796875,
+          "y1": 494.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1268,
+          1273
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "confidence": {
+        "p_correct": 0.9800000000000001,
+        "p_uncertain": 0.019999999999999907,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Juros sobre o Capital Próprio (JCP)",
+        "page": 1,
+        "bbox": {
+          "x0": 278.9927978515625,
+          "y0": 130.25367736816406,
+          "x1": 465.42083740234375,
+          "y1": 145.4006805419922,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          126,
+          161
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "R$ 0,1738420000",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,1738420000",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 339.273681640625,
+          "x1": 317.94091796875,
+          "y1": 353.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1079,
+          1094
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": "R$ 0,1434196500",
+      "confidence": {
+        "p_correct": 0.9700000000000001,
+        "p_uncertain": 0.02999999999999992,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,1434196500",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 396.273681640625,
+          "x1": 317.94091796875,
+          "y1": 410.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1143,
+          1158
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Banco Meridional do Brasil S.A. (BMRD4).",
+      "golden_emissor": "Banco Meridional do Brasil S.A.",
+      "golden_isin": "BRBMRDACNPR7",
+      "golden_ticker": "BMRD4"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe PN",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "líquido coerente com IRRF informado de 17.50% (erro 0.00%)",
+        "fields": [
+          "valor_bruto",
+          "valor_liquido",
+          "irrf_rate"
+        ]
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.967,
+      "components": {
+        "guardrails": 0.9091,
+        "groundedness": 1.0,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.962
+      }
+    }
+  },
+  "routing": {
+    "decision": "AUTO_APPROVE",
+    "reasons": [
+      "todos os guardrails passaram; identidade confirmada e campos confiáveis"
+    ],
+    "required_human_actions": []
+  },
+  "audit": {
+    "created_at": "2026-06-21T16:17:44.980328Z",
+    "sampling": {
+      "n": 5,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRBMRDACNPR7",
+          "ticker": "BMRD4"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Banco Meridional do Brasil S.A. (BMRD4)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe PN"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "PASS — líquido coerente com IRRF informado de 17.50% (erro 0.00%)"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:stub:heuristic-label-parser-v1"
+    }
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "event_type": "JCP",
+  "event_type_rationale": "O aviso é explicitamente intitulado 'Juros sobre o Capital Próprio (JCP)' e o texto confirma a natureza do provento, incluindo a incidência de IRRF.",
+  "fields": [
+    {
+      "name": "emissor",
+      "value": "BANCO MERIDIONAL DO BRASIL S.A.",
+      "quote": "BANCO MERIDIONAL DO BRASIL S.A.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Nome da companhia no cabeçalho."
+    },
+    {
+      "name": "cnpj",
+      "value": "60.111.222/0001-55",
+      "quote": "CNPJ/ME nº 60.111.222/0001-55",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "CNPJ da companhia no cabeçalho."
+    },
+    {
+      "name": "isin",
+      "value": "BRBMRDACNPR7",
+      "quote": "BMRD4 (ISIN BRBMRDACNPR7)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código ISIN explicitamente mencionado."
+    },
+    {
+      "name": "ticker",
+      "value": "BMRD4",
+      "quote": "BMRD4 (ISIN BRBMRDACNPR7)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Código de negociação (ticker) explicitamente mencionado."
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "quote": "Tipo de evento Juros sobre o Capital Próprio (JCP)",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Tipo de evento claramente indicado no documento."
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-02",
+      "quote": "Conselho de Administração, em reunião realizada em 02 de junho de 2026, aprovou",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data da reunião do Conselho de Administração que aprovou o JCP."
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-16",
+      "quote": "Farão jus ao provento os acionistas inscritos nos registros da Companhia ao final do dia 16 de junho de 2026 (“data com”).",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'com' explicitamente mencionada no texto e na seção de detalhes."
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-17",
+      "quote": "As ações passarão a ser negociadas “ex-JCP” a partir de 17 de junho de 2026.",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data 'ex-JCP' explicitamente mencionada no texto e na seção de detalhes."
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-08-14",
+      "quote": "Data de pagamento 14/08/2026",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Data de pagamento explicitamente mencionada."
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "O documento especifica 'Valor bruto' e 'Valor líquido', não um 'Valor' genérico."
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.1738420000",
+      "quote": "Valor bruto por ação preferencial (PN) R$ 0,1738420000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Valor bruto por ação claramente indicado."
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.1434196500",
+      "quote": "Valor líquido por ação (PN) R$ 0,1434196500",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "Valor líquido por ação claramente indicado."
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "quote": null,
+      "page": null,
+      "confidence": 0.0,
+      "rationale": "Não há menção a proporção, pois este é um evento de JCP, não bonificação ou desdobramento."
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "quote": "R$ 0,1738420000",
+      "page": null,
+      "confidence": 1.0,
+      "rationale": "O símbolo 'R$' indica a moeda Real Brasileiro."
+    }
+  ]
+}
