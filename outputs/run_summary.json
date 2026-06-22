@@ -1,0 +1,22 @@
+{
+  "run_id": "7e3c6df4b1f5",
+  "created_at": "2026-06-21T23:53:47.431880Z",
+  "total": 8,
+  "auto_approved": 4,
+  "review": 4,
+  "rejected": 0,
+  "auto_rate": 0.5,
+  "avg_confidence": 0.9738,
+  "type_mix": {
+    "DIVIDENDO": 2,
+    "JCP": 4,
+    "GRUPAMENTO": 1,
+    "BONIFICACAO": 1
+  },
+  "flag_reasons_histogram": {
+    "campos obrigatórios ausentes": 1,
+    "falha de coerência": 1,
+    "documento escaneado — leitura automática": 1,
+    "emissor desconhecido": 1
+  }
+}

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+backend/.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Env / secrets
+.env
+
+# Local runtime (SQLite fallback DB created by run.sh)
+.local/
+*.db
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
+
+# OS
+.DS_Store
+
+# Personal — do NOT publish to the case repository
+meu_curriculo/
+
+# NOTE: outputs/ and .cache/ are intentionally committed (deliverable + offline replay).

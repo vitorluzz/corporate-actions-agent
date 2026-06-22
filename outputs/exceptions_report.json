@@ -1,0 +1,54 @@
+[
+  {
+    "document": "04_rede_varejo_jcp_sem_data.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "JCP",
+    "golden_match": "EXACT",
+    "dq_score": 0.9154,
+    "reasons": [
+      "campos obrigatórios ausentes"
+    ],
+    "required_human_actions": [
+      "preencher campos: data_pagamento"
+    ]
+  },
+  {
+    "document": "05_aurora_saneamento_dividendo_datas.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "DIVIDENDO",
+    "golden_match": "EXACT",
+    "dq_score": 0.8701,
+    "reasons": [
+      "falha de coerência: date_order — data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)"
+    ],
+    "required_human_actions": [
+      "corrigir/validar: date_order"
+    ]
+  },
+  {
+    "document": "07_telecom_norte_jcp_SCAN.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "JCP",
+    "golden_match": "EXACT",
+    "dq_score": 0.9718,
+    "reasons": [
+      "documento escaneado — leitura automática (OCR/visão); conferir os valores contra a imagem"
+    ],
+    "required_human_actions": [
+      "validar os valores extraídos contra a imagem do documento"
+    ]
+  },
+  {
+    "document": "08_construtora_horizonte_bonificacao.pdf",
+    "decision": "HUMAN_REVIEW",
+    "event_type": "BONIFICACAO",
+    "golden_match": "NONE",
+    "dq_score": 0.8215,
+    "reasons": [
+      "emissor desconhecido (fora da base de referência)"
+    ],
+    "required_human_actions": [
+      "cadastrar/validar o emissor na base de referência"
+    ]
+  }
+]

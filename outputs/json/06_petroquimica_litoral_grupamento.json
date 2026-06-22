@@ -1,0 +1,524 @@
+{
+  "document": {
+    "id": "06_petroquimica_litoral_grupamento",
+    "source_file": "06_petroquimica_litoral_grupamento.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "gemini-2.5-flash",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "7e3c6df4b1f5",
+    "doc_hash": "147d83f038f6ca94"
+  },
+  "record": {
+    "emissor": "PETROQUÍMICA LITORAL S.A.",
+    "cnpj": "55.666.777/0001-08",
+    "isin": "BRPQLTACNOR8",
+    "ticker": "PQLT3",
+    "tipo_evento": "GRUPAMENTO",
+    "data_aprovacao": "2026-05-30",
+    "data_com": "2026-06-26",
+    "data_ex": "2026-06-29",
+    "data_pagamento": null,
+    "valor": null,
+    "valor_bruto": null,
+    "valor_liquido": null,
+    "irrf_rate": null,
+    "proporcao": "10:1",
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "GRUPAMENTO": 1.0
+    },
+    "argmax": "GRUPAMENTO",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 2
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "55.666.777/0001-08",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "CNPJ/ME nº 55.666.777/0001-08",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          56,
+          74
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-05-30",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Assembleia Geral Extraordinária realizada em 30 de maio de 2026 aprovou",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 152.273681640625,
+          "x1": 532.58251953125,
+          "y1": 181.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          212,
+          283
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-26",
+      "confidence": {
+        "p_correct": 0.88,
+        "p_uncertain": 0.0,
+        "p_error": 0.12
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "A posição acionária considerada para fins de grupamento será a do final do pregão de 26 de junho de 2026 (data-base do grupamento).",
+        "page": 1,
+        "bbox": {
+          "x0": 299.6009216308594,
+          "y0": 447.273681640625,
+          "x1": 349.6408996582031,
+          "y1": 461.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1337,
+          1347
+        ],
+        "match_score": 0.6
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-29",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "A partir de 29 de junho de 2026, as ações passarão a ser negociadas já grupadas.",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 250.273681640625,
+          "x1": 532.5824584960938,
+          "y1": 279.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          694,
+          774
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "PETROQUÍMICA LITORAL S.A.",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "PETROQUÍMICA LITORAL S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 202.65982055664062,
+          "y0": 56.11368179321289,
+          "x1": 392.61578369140625,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          25
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRPQLTACNOR8",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "ISIN BRPQLTACNOR8",
+        "page": 1,
+        "bbox": {
+          "x0": 298.4609069824219,
+          "y0": 468.273681640625,
+          "x1": 383.4709167480469,
+          "y1": 482.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1381,
+          1393
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": "10:1",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "na proporção de 10 (dez) ações existentes para 1 (uma) ação",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 384.273681640625,
+          "x1": 257.9009094238281,
+          "y1": 398.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1200,
+          1204
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "PQLT3",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "PQLT3",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 468.273681640625,
+          "x1": 270.12091064453125,
+          "y1": 482.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1369,
+          1374
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Grupamento de ações (inplit)",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Grupamento de ações (inplit)",
+        "page": 1,
+        "bbox": {
+          "x0": 295.19580078125,
+          "y0": 130.25367736816406,
+          "x1": 449.2178649902344,
+          "y1": 145.4006805419922,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          120,
+          148
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Petroquímica Litoral S.A. (PQLT3).",
+      "golden_emissor": "Petroquímica Litoral S.A.",
+      "golden_isin": "BRPQLTACNOR8",
+      "golden_ticker": "PQLT3"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe ON",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "campos mínimos presentes",
+        "fields": []
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "não é JCP",
+        "fields": []
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.9647,
+      "components": {
+        "guardrails": 0.8889,
+        "groundedness": 1.0,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.9867
+      }
+    }
+  },
+  "routing": {
+    "decision": "AUTO_APPROVE",
+    "reasons": [
+      "todos os guardrails passaram; identidade confirmada e campos confiáveis"
+    ],
+    "required_human_actions": []
+  },
+  "audit": {
+    "created_at": "2026-06-21T23:53:42.400113Z",
+    "sampling": {
+      "n": 2,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRPQLTACNOR8",
+          "ticker": "PQLT3"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Petroquímica Litoral S.A. (PQLT3)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe ON"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "PASS — campos mínimos presentes"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "NA — não é JCP"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:gemini:gemini-2.5-flash"
+    }
+  }
+}

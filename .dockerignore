@@ -1,0 +1,17 @@
+# Keep the Docker build context lean
+.git
+**/__pycache__
+**/.pytest_cache
+**/.ruff_cache
+**/.mypy_cache
+backend/.venv
+**/.venv
+frontend/node_modules
+frontend/dist
+.cache
+uploads
+outputs
+.local
+meu_curriculo
+*.db
+.env

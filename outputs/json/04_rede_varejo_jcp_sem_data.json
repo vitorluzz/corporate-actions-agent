@@ -1,0 +1,580 @@
+{
+  "document": {
+    "id": "04_rede_varejo_jcp_sem_data",
+    "source_file": "04_rede_varejo_jcp_sem_data.pdf",
+    "pages": 1,
+    "doc_class": "NATIVE",
+    "extraction_method": "native_text+bbox",
+    "model": "gemini-2.5-flash",
+    "model_version": null,
+    "prompt_hash": "59568ae5abdd78b6",
+    "run_id": "7e3c6df4b1f5",
+    "doc_hash": "37f846a73cb5486b"
+  },
+  "record": {
+    "emissor": "REDE VAREJO BRASIL S.A.",
+    "cnpj": "08.777.666/0001-33",
+    "isin": "BRRVBRACNOR9",
+    "ticker": "RVBR3",
+    "tipo_evento": "JCP",
+    "data_aprovacao": "2026-06-09",
+    "data_com": "2026-06-23",
+    "data_ex": "2026-06-24",
+    "data_pagamento": null,
+    "valor": null,
+    "valor_bruto": "0.2050000000",
+    "valor_liquido": "0.1691250000",
+    "irrf_rate": "0.175",
+    "proporcao": null,
+    "moeda": "BRL"
+  },
+  "event_type": {
+    "distribution": {
+      "JCP": 1.0
+    },
+    "argmax": "JCP",
+    "entropy": 0.0,
+    "confidence": 1.0,
+    "samples": 2
+  },
+  "fields": [
+    {
+      "name": "cnpj",
+      "value": "08.777.666/0001-33",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "CNPJ/ME nº 08.777.666/0001-33",
+        "page": 1,
+        "bbox": {
+          "x0": 279.0865478515625,
+          "y0": 80.38618469238281,
+          "x1": 355.1701354980469,
+          "y1": 92.06517791748047,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          54,
+          72
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-09",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Conselho de Administração, em reunião realizada em 09 de junho de 2026, aprovou o pagamento de Juros sobre o Capital Próprio (JCP)",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 152.273681640625,
+          "x1": 532.58251953125,
+          "y1": 181.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          188,
+          318
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-23",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Farão jus ao provento os acionistas titulares de ações ao final do dia 23 de junho de 2026 (“data com”)",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 205.273681640625,
+          "x1": 532.5824584960938,
+          "y1": 219.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          371,
+          474
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-24",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "negociando-se as ações “ex-JCP” a partir de 24 de junho de 2026.",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 220.273681640625,
+          "x1": 357.84283447265625,
+          "y1": 234.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          476,
+          540
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.0,
+        "p_uncertain": 0.5,
+        "p_error": 0.5
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "emissor",
+      "value": "REDE VAREJO BRASIL S.A.",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "REDE VAREJO BRASIL S.A.",
+        "page": 1,
+        "bbox": {
+          "x0": 210.5963134765625,
+          "y0": 56.11368179321289,
+          "x1": 384.6793212890625,
+          "y1": 74.01467895507812,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          0,
+          23
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": "17.5",
+      "confidence": {
+        "p_correct": 0.925,
+        "p_uncertain": 0.0,
+        "p_error": 0.07499999999999996
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "com retenção de IRRF de 17,5% sobre o valor bruto.",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 345.273681640625,
+          "x1": 266.7909240722656,
+          "y1": 359.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          927,
+          931
+        ],
+        "match_score": 0.75
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "isin",
+      "value": "BRRVBRACNOR9",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "ISIN BRRVBRACNOR9",
+        "page": 1,
+        "bbox": {
+          "x0": 300.12091064453125,
+          "y0": 450.273681640625,
+          "x1": 386.7909240722656,
+          "y1": 464.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1121,
+          1133
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "moeda",
+      "value": "BRL",
+      "confidence": {
+        "p_correct": 0.9,
+        "p_uncertain": 0.0,
+        "p_error": 0.09999999999999998
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,2050000000",
+        "page": 1,
+        "bbox": {
+          "x0": 135.9984893798828,
+          "y0": 152.3236846923828,
+          "x1": 163.78848266601562,
+          "y1": 166.09368896484375,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          162,
+          165
+        ],
+        "match_score": 0.6667
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "ticker",
+      "value": "RVBR3",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "RVBR3",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 450.273681640625,
+          "x1": 271.7809143066406,
+          "y1": 464.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1109,
+          1114
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "tipo_evento",
+      "value": "Juros sobre o Capital Próprio (JCP)",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Juros sobre o Capital Próprio (JCP)",
+        "page": 1,
+        "bbox": {
+          "x0": 249.34805297851562,
+          "y0": 167.273681640625,
+          "x1": 412.6302795410156,
+          "y1": 181.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          283,
+          318
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.2050000000",
+      "confidence": {
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,2050000000",
+        "page": 1,
+        "bbox": {
+          "x0": 254.00091552734375,
+          "y0": 324.273681640625,
+          "x1": 317.94091796875,
+          "y1": 338.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          900,
+          912
+        ],
+        "match_score": 0.9167
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": "0.1691250000",
+      "confidence": {
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "R$ 0,1691250000",
+        "page": 1,
+        "bbox": {
+          "x0": 254.00091552734375,
+          "y0": 366.273681640625,
+          "x1": 317.94091796875,
+          "y1": 380.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          962,
+          974
+        ],
+        "match_score": 0.9167
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    }
+  ],
+  "validation": {
+    "golden_match": {
+      "status": "EXACT",
+      "matched_on": [
+        "isin",
+        "ticker",
+        "cnpj",
+        "emissor"
+      ],
+      "discrepancies": [],
+      "explanation": "casou por isin, ticker, cnpj, emissor → Rede Varejo Brasil S.A. (RVBR3).",
+      "golden_emissor": "Rede Varejo Brasil S.A.",
+      "golden_isin": "BRRVBRACNOR9",
+      "golden_ticker": "RVBR3"
+    },
+    "coherence_checks": [
+      {
+        "name": "isin_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório; identidade pela base)",
+        "fields": [
+          "isin"
+        ]
+      },
+      {
+        "name": "cnpj_checksum",
+        "status": "WARN",
+        "severity": "INFO",
+        "message": "dígito verificador inválido (advisório)",
+        "fields": [
+          "cnpj"
+        ]
+      },
+      {
+        "name": "ticker_class",
+        "status": "PASS",
+        "severity": "INFO",
+        "message": "sufixo do ticker indica classe ON",
+        "fields": [
+          "ticker"
+        ]
+      },
+      {
+        "name": "required_fields",
+        "status": "FAIL",
+        "severity": "WARNING",
+        "message": "campos obrigatórios ausentes: data_pagamento",
+        "fields": [
+          "data_pagamento"
+        ]
+      },
+      {
+        "name": "date_order",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "datas em ordem coerente",
+        "fields": []
+      },
+      {
+        "name": "event_type_substance",
+        "status": "NA",
+        "severity": "WARNING",
+        "message": "sem indício de inconsistência entre tipo e substância",
+        "fields": []
+      },
+      {
+        "name": "jcp_gross_net",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "líquido coerente com IRRF informado de 17.50% (erro 0.00%)",
+        "fields": [
+          "valor_bruto",
+          "valor_liquido",
+          "irrf_rate"
+        ]
+      },
+      {
+        "name": "groundedness",
+        "status": "PASS",
+        "severity": "WARNING",
+        "message": "todos os valores extraídos estão ancorados na fonte",
+        "fields": []
+      }
+    ],
+    "dq_score": {
+      "score": 0.9154,
+      "components": {
+        "guardrails": 0.7273,
+        "groundedness": 1.0,
+        "identity": 1.0,
+        "type_confidence": 1.0,
+        "field_confidence": 0.9813
+      }
+    }
+  },
+  "routing": {
+    "decision": "HUMAN_REVIEW",
+    "reasons": [
+      "campos obrigatórios ausentes"
+    ],
+    "required_human_actions": [
+      "preencher campos: data_pagamento"
+    ]
+  },
+  "audit": {
+    "created_at": "2026-06-21T23:53:42.388137Z",
+    "sampling": {
+      "n": 2,
+      "temperature": 0.5
+    },
+    "tool_calls": [
+      {
+        "tool": "lookup_golden_record",
+        "arguments": {
+          "isin": "BRRVBRACNOR9",
+          "ticker": "RVBR3"
+        },
+        "result_summary": "EXACT: casou por isin, ticker, cnpj, emissor → Rede Varejo Brasil S.A. (RVBR3)."
+      },
+      {
+        "tool": "isin_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório; identidade pela base)"
+      },
+      {
+        "tool": "cnpj_checksum",
+        "arguments": {},
+        "result_summary": "WARN — dígito verificador inválido (advisório)"
+      },
+      {
+        "tool": "ticker_class",
+        "arguments": {},
+        "result_summary": "PASS — sufixo do ticker indica classe ON"
+      },
+      {
+        "tool": "required_fields",
+        "arguments": {},
+        "result_summary": "FAIL — campos obrigatórios ausentes: data_pagamento"
+      },
+      {
+        "tool": "date_order",
+        "arguments": {},
+        "result_summary": "PASS — datas em ordem coerente"
+      },
+      {
+        "tool": "event_type_substance",
+        "arguments": {},
+        "result_summary": "NA — sem indício de inconsistência entre tipo e substância"
+      },
+      {
+        "tool": "jcp_gross_net",
+        "arguments": {},
+        "result_summary": "PASS — líquido coerente com IRRF informado de 17.50% (erro 0.00%)"
+      },
+      {
+        "tool": "groundedness",
+        "arguments": {},
+        "result_summary": "PASS — todos os valores extraídos estão ancorados na fonte"
+      }
+    ],
+    "versions": {
+      "app": "0.1.0",
+      "llm": "cached:gemini:gemini-2.5-flash"
+    }
+  }
+}
