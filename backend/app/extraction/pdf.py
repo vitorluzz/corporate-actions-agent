@@ -16,6 +16,7 @@ from pathlib import Path
 import fitz  # PyMuPDF
 
 from app.domain.enums import DocumentClass
+from app.extraction.ocr import ocr_page
 
 # Below this many chars of extracted text, we treat a document as scanned.
 _SCANNED_TEXT_CHAR_THRESHOLD = 80
@@ -38,6 +39,7 @@ class Page:
     text: str
     words: list[Word] = field(default_factory=list)
     image_b64: str | None = None  # populated for scanned docs
+    ocr: bool = False             # text/words came from Tesseract OCR (pixel-space boxes)
 
 
 @dataclass
@@ -107,8 +109,20 @@ def load_document(path: str | Path) -> LoadedDocument:
         doc_class = DocumentClass.SCANNED if is_scanned else DocumentClass.NATIVE
 
         for i, text, words, page in raw_pages:
-            image_b64 = _render_png_b64(page) if is_scanned else None
-            pages.append(Page(number=i, text=text, words=words, image_b64=image_b64))
+            if is_scanned:
+                # No text layer → OCR the rendered page (best-effort) for text + word boxes.
+                ocr_text, ocr_boxes = ocr_page(page, dpi=_RENDER_DPI)
+                ocr_words = [Word(x0=b[0], y0=b[1], x1=b[2], y1=b[3], text=b[4], page=i) for b in ocr_boxes]
+                used_ocr = bool(ocr_text.strip())
+                pages.append(Page(
+                    number=i,
+                    text=ocr_text if used_ocr else text,
+                    words=ocr_words if used_ocr else words,
+                    image_b64=_render_png_b64(page),
+                    ocr=used_ocr,
+                ))
+            else:
+                pages.append(Page(number=i, text=text, words=words))
 
     return LoadedDocument(
         doc_id=path.stem,

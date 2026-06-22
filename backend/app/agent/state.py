@@ -5,6 +5,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, Field
 
 from app.agent.assembly import FieldSignals
+from app.agent.crossmodal import CrossModal
 from app.agent.selfconsistency import Consensus
 from app.domain.schemas import (
     DataQualityScore,
@@ -28,6 +29,8 @@ class PipelineState(BaseModel):
 
     samples: list[RawExtraction] = Field(default_factory=list)
     consensus: Consensus | None = None
+    ocr_consensus: Consensus | None = None
+    crossmodal: dict[str, CrossModal] = Field(default_factory=dict)
     record: Record | None = None
     fields: list[ExtractedField] = Field(default_factory=list)
     signals: list[FieldSignals] = Field(default_factory=list)

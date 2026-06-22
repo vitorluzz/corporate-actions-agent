@@ -1,4 +1,13 @@
 import { useState } from "react";
+import {
+  IconCheckCircle,
+  IconClock,
+  IconDatabase,
+  IconFlag,
+  IconGauge,
+  IconScale,
+  IconXCircle,
+} from "./icons";
 import type {
   AuditEvent,
   DocumentResult,
@@ -21,15 +30,22 @@ export function DecisionBadge({ decision }: { decision: Routing["decision"] | st
     decision === "AUTO_APPROVE" ? "ok" : decision === "REJECT" ? "bad" : "warn";
   const label =
     decision === "AUTO_APPROVE" ? "Auto-aprovado" : decision === "REJECT" ? "Rejeitado" : "Revisão humana";
-  return <span className={`badge ${cls}`}>{label}</span>;
+  const Icon = decision === "AUTO_APPROVE" ? IconCheckCircle : decision === "REJECT" ? IconXCircle : IconFlag;
+  return (
+    <span className={`badge ${cls}`}>
+      <Icon size={13} /> {label}
+    </span>
+  );
 }
 
 export function ConfidenceBar({ p }: { p: number }) {
-  const tier = confTier(p);
+  const pct = Math.round(p * 100);
   return (
-    <div className="confbar" title={`p_correct=${(p * 100).toFixed(0)}%`}>
-      <div className={`confbar-fill ${tier}`} style={{ width: `${Math.round(p * 100)}%` }} />
-      <span className="confbar-label">{Math.round(p * 100)}%</span>
+    <div className="confrow" title={`p_correct=${pct}%`}>
+      <div className="confbar">
+        <span className="confbar-marker" style={{ left: `${pct}%` }} />
+      </div>
+      <span className="confbar-num">{pct}%</span>
     </div>
   );
 }
@@ -39,7 +55,7 @@ export function EventTypeBar({ et }: { et: EventTypeDistribution }) {
   return (
     <div className="card">
       <div className="card-h">
-        Tipo de evento — <strong>{et.argmax}</strong>
+        <IconGauge size={15} /> Tipo de evento — <strong>{et.argmax}</strong>
         <span className="muted"> · conf {(et.confidence * 100).toFixed(0)}% · entropia {et.entropy.toFixed(2)} · {et.samples} amostras</span>
       </div>
       <div className="dist">
@@ -60,7 +76,7 @@ const STATUS_CLS: Record<string, string> = { PASS: "ok", WARN: "warn", FAIL: "ba
 export function GuardrailList({ guards }: { guards: GuardrailResult[] }) {
   return (
     <div className="card">
-      <div className="card-h">Guardrails / Data Quality</div>
+      <div className="card-h"><IconScale size={15} /> Guardrails / Data Quality</div>
       <ul className="guards">
         {guards.map((g) => (
           <li key={g.name}>
@@ -78,7 +94,7 @@ export function GoldenPanel({ gm }: { gm: GoldenMatch }) {
   const cls = gm.status === "EXACT" ? "ok" : gm.status === "NONE" || gm.status === "CONFLICT" ? "bad" : "warn";
   return (
     <div className="card">
-      <div className="card-h">Base de referência (entity resolution)</div>
+      <div className="card-h"><IconDatabase size={15} /> Base de referência (entity resolution)</div>
       <div>
         <span className={`pill ${cls}`}>{gm.status}</span>
         <span className="muted"> {gm.golden_ticker ? `→ ${gm.golden_emissor} (${gm.golden_ticker})` : ""}</span>
@@ -99,27 +115,44 @@ export function FieldCard({
   f,
   draft,
   onChange,
+  onReset,
 }: {
   f: ExtractedField;
   draft: string | undefined;
   onChange: (name: string, value: string) => void;
+  onReset?: (name: string) => void;
 }) {
   const tier = confTier(f.confidence.p_correct);
   const ev = f.evidence;
+  const original = f.value ?? "";
+  const edited = draft !== undefined && draft !== original;
   return (
-    <div className={`field ${tier}`}>
+    <div className={`field ${tier}${edited ? " edited" : ""}`}>
       <div className="field-top">
         <span className="field-name">{f.name}</span>
-        {f.grounded ? <span className="pill ok sm">ancorado</span> : <span className="pill bad sm">sem âncora</span>}
+        <span className="field-tags">
+          {edited && onReset && (
+            <button className="field-reset" title="Desfazer alteração" onClick={() => onReset(f.name)}>↺</button>
+          )}
+          {edited ? (
+            <span className="pill warn sm">editado</span>
+          ) : f.grounded ? (
+            <span className="pill ok sm">ancorado</span>
+          ) : (
+            <span className="pill bad sm">sem âncora</span>
+          )}
+        </span>
       </div>
       <input
         className="field-input"
         value={draft ?? f.value ?? ""}
-        placeholder="—"
+        placeholder="— (vazio) · clique para preencher"
         onChange={(e) => onChange(f.name, e.target.value)}
       />
       <ConfidenceBar p={f.confidence.p_correct} />
       <div className="field-meta">
+        {edited && <span className="muted2">original: <code>{original || "—"}</code> · </span>}
+        {ev?.source && <span className="src-tag" title="fonte da evidência (proveniência)">{ev.source}</span>}
         {ev?.quote && <span className="quote" title={ev.quote}>“{ev.quote.slice(0, 80)}”</span>}
         {ev?.page != null && <span className="muted2"> · p.{ev.page}{ev.bbox ? " · bbox" : ""}</span>}
       </div>
@@ -131,7 +164,7 @@ export function FieldCard({
 export function AuditTrail({ events }: { events: AuditEvent[] }) {
   return (
     <div className="card">
-      <div className="card-h">Trilha de auditoria (append-only)</div>
+      <div className="card-h"><IconClock size={15} /> Trilha de auditoria (append-only)</div>
       <ol className="audit">
         {events.map((e) => (
           <li key={e.id}>
@@ -187,8 +220,14 @@ export function Dashboard({ summary }: { summary: RunSummary }) {
 export function useDraft() {
   const [draft, setDraft] = useState<Record<string, string>>({});
   const onChange = (name: string, value: string) => setDraft((d) => ({ ...d, [name]: value }));
+  const resetField = (name: string) =>
+    setDraft((d) => {
+      const next = { ...d };
+      delete next[name];
+      return next;
+    });
   const reset = () => setDraft({});
-  return { draft, onChange, reset };
+  return { draft, onChange, reset, resetField };
 }
 
 export type Result = DocumentResult;

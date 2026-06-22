@@ -5,10 +5,10 @@
     "pages": 1,
     "doc_class": "NATIVE",
     "extraction_method": "native_text+bbox",
-    "model": "heuristic-label-parser-v1",
+    "model": "gemini-2.5-flash",
     "model_version": null,
     "prompt_hash": "59568ae5abdd78b6",
-    "run_id": "5451aa15fe8e",
+    "run_id": "7e3c6df4b1f5",
     "doc_hash": "925b6eb09fbcaecf"
   },
   "record": {
@@ -22,7 +22,7 @@
     "data_ex": "2026-07-16",
     "data_pagamento": "2026-07-10",
     "valor": "0.3100000000",
-    "valor_bruto": null,
+    "valor_bruto": "0.3100000000",
     "valor_liquido": null,
     "irrf_rate": null,
     "proporcao": null,
@@ -35,20 +35,20 @@
     "argmax": "DIVIDENDO",
     "entropy": 0.0,
     "confidence": 1.0,
-    "samples": 5
+    "samples": 2
   },
   "fields": [
     {
       "name": "cnpj",
       "value": "22.333.444/0001-77",
       "confidence": {
-        "p_correct": 0.9840000000000001,
-        "p_uncertain": 0.015999999999999903,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "22.333.444/0001-77",
+        "quote": "CNPJ/ME nº 22.333.444/0001-77",
         "page": 1,
         "bbox": {
           "x0": 279.0865478515625,
@@ -64,126 +64,126 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_aprovacao",
-      "value": "01/06/2026",
+      "value": "2026-06-01",
       "confidence": {
-        "p_correct": 0.8200000000000001,
-        "p_uncertain": 0.023478260869565216,
-        "p_error": 0.15652173913043474
+        "p_correct": 0.8411764705882353,
+        "p_uncertain": 0.0,
+        "p_error": 0.1588235294117647
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "01/06/2026",
+        "quote": "Data de aprovação (RCA)\n01/06/2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 62.692909240722656,
           "y0": 315.273681640625,
           "x1": 288.4809265136719,
-          "y1": 329.013671875,
+          "y1": 329.09368896484375,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          775,
+          751,
           785
         ],
-        "match_score": 1.0
+        "match_score": 0.9706
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_com",
-      "value": "15/07/2026",
+      "value": "2026-07-15",
       "confidence": {
-        "p_correct": 0.8200000000000001,
-        "p_uncertain": 0.023478260869565216,
-        "p_error": 0.15652173913043474
+        "p_correct": 0.8409090909090909,
+        "p_uncertain": 0.0,
+        "p_error": 0.15909090909090906
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "15/07/2026",
+        "quote": "Data-base (“data com”)\n15/07/2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 62.692909240722656,
           "y0": 336.273681640625,
           "x1": 288.4809265136719,
-          "y1": 350.013671875,
+          "y1": 350.09368896484375,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          809,
+          786,
           819
         ],
-        "match_score": 1.0
+        "match_score": 0.9697
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_ex",
-      "value": "16/07/2026",
+      "value": "2026-07-16",
       "confidence": {
-        "p_correct": 0.8200000000000001,
-        "p_uncertain": 0.023478260869565216,
-        "p_error": 0.15652173913043474
+        "p_correct": 0.8403225806451613,
+        "p_uncertain": 0.0,
+        "p_error": 0.1596774193548387
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "16/07/2026",
+        "quote": "Data “ex-dividendos”\n16/07/2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 62.692909240722656,
           "y0": 357.273681640625,
           "x1": 288.4809265136719,
-          "y1": 371.013671875,
+          "y1": 371.09368896484375,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          841,
+          820,
           851
         ],
-        "match_score": 1.0
+        "match_score": 0.9677
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_pagamento",
-      "value": "10/07/2026",
+      "value": "2026-07-10",
       "confidence": {
-        "p_correct": 0.8200000000000001,
-        "p_uncertain": 0.023478260869565216,
-        "p_error": 0.15652173913043474
+        "p_correct": 0.8392857142857143,
+        "p_uncertain": 0.0,
+        "p_error": 0.1607142857142857
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "10/07/2026",
+        "quote": "Data de pagamento\n10/07/2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 62.692909240722656,
           "y0": 378.273681640625,
           "x1": 288.4809265136719,
-          "y1": 392.013671875,
+          "y1": 392.09368896484375,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          870,
+          852,
           880
         ],
-        "match_score": 1.0
+        "match_score": 0.9643
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "emissor",
       "value": "AURORA SANEAMENTO S.A.",
       "confidence": {
-        "p_correct": 0.93,
-        "p_uncertain": 0.06999999999999995,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -204,19 +204,31 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "isin",
       "value": "BRAURSACNOR4",
       "confidence": {
-        "p_correct": 0.9900000000000001,
-        "p_uncertain": 0.009999999999999898,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "BRAURSACNOR4",
+        "quote": "ISIN BRAURSACNOR4",
         "page": 1,
         "bbox": {
           "x0": 300.12091064453125,
@@ -232,19 +244,19 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "moeda",
       "value": "BRL",
       "confidence": {
-        "p_correct": 0.86,
-        "p_uncertain": 0.052500000000000005,
-        "p_error": 0.08750000000000001
+        "p_correct": 0.9,
+        "p_uncertain": 0.0,
+        "p_error": 0.09999999999999998
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "R$",
+        "quote": "R$ 0,3100000000",
         "page": 1,
         "bbox": {
           "x0": 300.12091064453125,
@@ -260,14 +272,26 @@
         "match_score": 0.6667
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "ticker",
       "value": "AURS3",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -288,19 +312,19 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "tipo_evento",
       "value": "Dividendo intercalar",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "Dividendo intercalar",
+        "quote": "Tipo de evento\nDividendo intercalar",
         "page": 1,
         "bbox": {
           "x0": 238.44091796875,
@@ -316,35 +340,75 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "valor",
-      "value": "R$ 0,3100000000",
+      "value": "0.3100000000",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
-        "p_error": 0.0
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "R$ 0,3100000000",
+        "quote": "Valor bruto por ação ON\nR$ 0,3100000000",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 254.00091552734375,
           "y0": 294.273681640625,
           "x1": 317.94091796875,
           "y1": 308.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          735,
+          738,
           750
         ],
-        "match_score": 1.0
+        "match_score": 0.9167
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": "0.3100000000",
+      "confidence": {
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Valor bruto por ação ON\nR$ 0,3100000000",
+        "page": 1,
+        "bbox": {
+          "x0": 254.00091552734375,
+          "y0": 294.273681640625,
+          "x1": 317.94091796875,
+          "y1": 308.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          738,
+          750
+        ],
+        "match_score": 0.9167
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     }
   ],
   "validation": {
@@ -432,13 +496,13 @@
       }
     ],
     "dq_score": {
-      "score": 0.866,
+      "score": 0.8701,
       "components": {
         "guardrails": 0.6,
         "groundedness": 1.0,
         "identity": 1.0,
         "type_confidence": 1.0,
-        "field_confidence": 0.9067
+        "field_confidence": 0.9343
       }
     }
   },
@@ -452,9 +516,9 @@
     ]
   },
   "audit": {
-    "created_at": "2026-06-21T16:17:44.999108Z",
+    "created_at": "2026-06-21T23:53:42.394912Z",
     "sampling": {
-      "n": 5,
+      "n": 2,
       "temperature": 0.5
     },
     "tool_calls": [
@@ -509,7 +573,7 @@
     ],
     "versions": {
       "app": "0.1.0",
-      "llm": "cached:stub:heuristic-label-parser-v1"
+      "llm": "cached:gemini:gemini-2.5-flash"
     }
   }
 }

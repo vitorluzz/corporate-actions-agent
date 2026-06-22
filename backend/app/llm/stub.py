@@ -78,6 +78,17 @@ def _value_after(
             label_idx = i
     if label_idx is None:
         return None, None
+    # 1) Same line, after the label text. OCR linearises the row onto one line, e.g.
+    #    "Data de pagamento .......... 21/08/2026" (label and value together).
+    label_end = 0
+    for lbl in label_variants:
+        pos = low[label_idx].find(lbl)
+        if pos >= 0:
+            label_end = max(label_end, pos + len(lbl))
+    m = pattern.search(lines[label_idx][label_end:])
+    if m:
+        return m.group(0), label_idx
+    # 2) Following lines. Native PDFs put the value on a separate line below the label.
     for j in range(label_idx + 1, min(label_idx + 1 + max_skip, len(lines))):
         m = pattern.search(lines[j])
         if m:
@@ -104,8 +115,15 @@ class StubClient:
         fields: list[RawField] = []
 
         # --- event type (prefer the "Tipo de evento" value line) -----------
-        type_value, _ = _value_after(lines, ("tipo de evento",), re.compile(r"\S.*"))
+        # Start the value at the first alphanumeric so OCR dotted leaders
+        # ("Tipo de evento ......... JCP") aren't captured as the value.
+        type_value, _ = _value_after(lines, ("tipo de evento",), re.compile(r"[0-9A-Za-zÀ-ÿ].*"))
         etype, reason = _classify(type_value or text)
+        if etype is EventType.INCERTO and type_value:
+            # the labelled value was unhelpful (e.g. OCR-linearised table noise) → classify
+            # against the whole document, whose keywords are robust.
+            etype, reason = _classify(text)
+            type_value = None
         if type_value:
             fields.append(RawField(name="tipo_evento", value=type_value.strip(),
                                    quote=type_value.strip(), confidence=0.9, rationale=reason))

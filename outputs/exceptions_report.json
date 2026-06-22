@@ -1,23 +1,10 @@
 [
   {
-    "document": "03_siderurgica_paranaense_proventos.pdf",
-    "decision": "HUMAN_REVIEW",
-    "event_type": "DIVIDENDO",
-    "golden_match": "EXACT",
-    "dq_score": 0.8917,
-    "reasons": [
-      "falha de coerência: event_type_substance — classificado como dividendo, mas há retenção na fonte (líquido < bruto) — substância compatível com JCP; confirmar tipo e tratamento tributário"
-    ],
-    "required_human_actions": [
-      "corrigir/validar: event_type_substance"
-    ]
-  },
-  {
     "document": "04_rede_varejo_jcp_sem_data.pdf",
     "decision": "HUMAN_REVIEW",
     "event_type": "JCP",
     "golden_match": "EXACT",
-    "dq_score": 0.9124,
+    "dq_score": 0.9154,
     "reasons": [
       "campos obrigatórios ausentes"
     ],
@@ -30,7 +17,7 @@
     "decision": "HUMAN_REVIEW",
     "event_type": "DIVIDENDO",
     "golden_match": "EXACT",
-    "dq_score": 0.866,
+    "dq_score": 0.8701,
     "reasons": [
       "falha de coerência: date_order — data_ex (2026-07-16) deve preceder data_pagamento (2026-07-10)"
     ],
@@ -41,19 +28,14 @@
   {
     "document": "07_telecom_norte_jcp_SCAN.pdf",
     "decision": "HUMAN_REVIEW",
-    "event_type": "INCERTO",
-    "golden_match": "NONE",
-    "dq_score": 0.54,
+    "event_type": "JCP",
+    "golden_match": "EXACT",
+    "dq_score": 0.9718,
     "reasons": [
-      "tipo de evento ambíguo/genérico (INCERTO)",
-      "campos obrigatórios ausentes",
-      "documento escaneado não pôde ser lido automaticamente (sem camada de texto; requer visão/OCR ou leitura humana)",
-      "Data Quality abaixo do limiar (0.54 < 0.75)"
+      "documento escaneado — leitura automática (OCR/visão); conferir os valores contra a imagem"
     ],
     "required_human_actions": [
-      "classificar o tipo de evento manualmente",
-      "preencher campos: emissor, isin, ticker",
-      "ler o documento manualmente ou reprocessar com visão (Gemini)"
+      "validar os valores extraídos contra a imagem do documento"
     ]
   },
   {
@@ -61,7 +43,7 @@
     "decision": "HUMAN_REVIEW",
     "event_type": "BONIFICACAO",
     "golden_match": "NONE",
-    "dq_score": 0.8167,
+    "dq_score": 0.8215,
     "reasons": [
       "emissor desconhecido (fora da base de referência)"
     ],

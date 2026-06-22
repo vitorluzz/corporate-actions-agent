@@ -11,6 +11,7 @@ from datetime import UTC, datetime
 
 from app import __version__
 from app.agent.assembly import apply_guardrail_signal, assemble
+from app.agent.crossmodal import build_ocr_consensus, crosscheck_guardrail, crossmodal_map
 from app.agent.routing import decide_routing
 from app.agent.selfconsistency import aggregate
 from app.agent.state import PipelineState
@@ -34,6 +35,16 @@ from app.validation.golden_match import resolve_identity
 _PROMPT_HASH = prompt_hash(SYSTEM_PROMPT, EXTRACTION_INSTRUCTION)
 
 
+def _extraction_method(is_scan: bool, provider: str, full_text: str) -> str:
+    if not is_scan:
+        return "native_text+bbox"
+    if "gemini" in provider:
+        return "gemini_vision"
+    if full_text.strip():
+        return "tesseract_ocr"
+    return "scanned_no_text"
+
+
 class AgentNodes:
     def __init__(self, llm: LLMClient, golden: GoldenBase, settings: Settings) -> None:
         self.llm = llm
@@ -47,7 +58,9 @@ class AgentNodes:
         inp = ExtractionInput(
             doc_id=doc.doc_id,
             doc_hash=doc.doc_hash,
-            text=None if is_scan else doc.full_text,
+            # OCR (when available) gives a scanned doc a text layer the offline extractor can
+            # parse; vision providers still receive the page image below.
+            text=doc.full_text or None,
             image_b64=doc.images_b64 if is_scan else [],
             is_scan=is_scan,
         )
@@ -59,11 +72,20 @@ class AgentNodes:
             )
             for i in range(self.settings.self_consistency_n)
         ]
+        # Cross-modal: when a scan was read by vision, also run the deterministic
+        # OCR-text extractor as an *independent* second vote (anchor + verify).
+        if is_scan and "gemini" in self.llm.name and doc.full_text.strip():
+            state.ocr_consensus = build_ocr_consensus(doc, self.settings)
         return state
 
     def classify_and_assemble(self, state: PipelineState) -> PipelineState:
         state.consensus = aggregate(state.samples)
-        record, fields, signals = assemble(state.consensus, state.doc, self.settings)
+        state.crossmodal = crossmodal_map(
+            state.consensus, state.ocr_consensus, state.doc.full_text
+        )
+        record, fields, signals = assemble(
+            state.consensus, state.doc, self.settings, crossmodal=state.crossmodal
+        )
         state.record, state.fields, state.signals = record, fields, signals
         return state
 
@@ -79,6 +101,10 @@ class AgentNodes:
             )
         )
         guards = run_guardrails(state.record, state.fields, self.settings)
+        # Cross-modal coherence: vision↔OCR disagreements on a scan are auditable
+        # signals that escalate the affected fields (and the document) for review.
+        if state.crossmodal:
+            guards.append(crosscheck_guardrail(state.crossmodal))
         state.guardrails = guards
         for g in guards:
             state.tool_calls.append(
@@ -130,7 +156,7 @@ class AgentNodes:
             source_file=doc.source_file,
             pages=doc.page_count,
             doc_class=doc.doc_class,
-            extraction_method="gemini_vision" if is_scan else "native_text+bbox",
+            extraction_method=_extraction_method(is_scan, self.llm.name, doc.full_text),
             model=self.llm.model,
             prompt_hash=_PROMPT_HASH,
             run_id=state.run_id,

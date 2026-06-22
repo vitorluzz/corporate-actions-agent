@@ -307,26 +307,104 @@ def project_report(session: Session, project_id: str) -> dict:
     }
 
 
+# Fields compared across documents to *prove* a relationship (which field links two files).
+GRAPH_COMPARE_FIELDS: list[tuple[str, str]] = [
+    ("emissor", "Emissor"),
+    ("cnpj", "CNPJ"),
+    ("isin", "ISIN"),
+    ("ticker", "Ticker"),
+    ("evento", "Tipo de evento"),
+    ("data_aprovacao", "Data aprovação"),
+    ("data_com", "Data com"),
+    ("data_ex", "Data ex"),
+    ("data_pagamento", "Data pagamento"),
+    ("valor", "Valor / provento"),
+]
+
+# A real duplicate needs more than the same event type — at least one of these must also match.
+GRAPH_DUP_KEYS = ("data_aprovacao", "data_com", "data_ex", "data_pagamento", "valor")
+
+
+def _graph_fmt(value: object) -> str | None:
+    """Render a record value as a stable display string (or None when empty)."""
+    if value is None:
+        return None
+    if isinstance(value, date):  # date and datetime
+        return value.isoformat()
+    if isinstance(value, Decimal):
+        return format(value.normalize(), "f")  # drop trailing zeros, no sci-notation
+    text = str(value).strip()
+    return text or None
+
+
+def _graph_norm(key: str, value: str | None) -> str | None:
+    """Normalised form used to decide whether two values are *the same*."""
+    if not value:
+        return None
+    if key == "emissor":
+        return normalize_issuer(value) or None
+    return value.strip().lower()
+
+
 def build_project_graph(session: Session, project_id: str, golden: GoldenBase) -> dict:
     """Traceability graph: emissor hubs + documents, with typed relationships.
 
-    Derived purely from the persisted records (issuer/ISIN/ticker/type) — no extra
-    LLM work. Lets an operator see which notices belong to the same issuer/security,
-    which share an event type, and which look like duplicates.
+    Derived purely from the persisted records — no extra LLM work. Each node carries
+    the key record fields, and every edge carries ``shared``: the list of fields whose
+    values are identical on both ends. That is the *evidence* that proves why two files
+    are related (e.g. "mesmo ISIN" / "mesmo emissor + mesma data de pagamento").
     """
     parsed = [(d, DocumentResult.model_validate(d.result)) for d in list_documents(session, project_id)]
 
-    def entity_key(res: DocumentResult) -> tuple[str, str]:
+    def entity_key(d, res: DocumentResult) -> tuple[str, str]:
         gm = res.validation.golden_match
-        name = gm.golden_emissor or (res.record.emissor or "Emissor desconhecido")
-        return normalize_issuer(name) or "desconhecido", name
+        name = gm.golden_emissor or res.record.emissor
+        norm = normalize_issuer(name) if name else None
+        if norm:
+            return norm, name
+        # Unresolved issuer (e.g. an unreadable scan) → a *private* hub per document.
+        # Never merge distinct unknowns into one bogus "desconhecido" issuer.
+        return f"unknown:{d.id}", name or "Emissor não identificado"
 
+    def type_provisional(res: DocumentResult) -> bool:
+        # The event-type classification is contested (substance conflict, e.g. dividendo↔JCP),
+        # so any link drawn *from the type* is provisional until a human confirms it.
+        return any(
+            c.name == "event_type_substance" and c.status.value in ("FAIL", "WARN")
+            for c in res.validation.coherence_checks
+        )
+
+    def doc_fields(res: DocumentResult) -> dict[str, str | None]:
+        r = res.record
+        return {
+            "emissor": _graph_fmt(r.emissor),
+            "cnpj": _graph_fmt(r.cnpj),
+            "isin": _graph_fmt(r.isin),
+            "ticker": _graph_fmt(r.ticker),
+            "evento": res.event_type.argmax.value,
+            "data_aprovacao": _graph_fmt(r.data_aprovacao),
+            "data_com": _graph_fmt(r.data_com),
+            "data_ex": _graph_fmt(r.data_ex),
+            "data_pagamento": _graph_fmt(r.data_pagamento),
+            "valor": _graph_fmt(r.valor if r.valor is not None else r.valor_bruto),
+        }
+
+    def shared(fa: dict[str, str | None], fb: dict[str, str | None]) -> list[str]:
+        out = []
+        for key, _ in GRAPH_COMPARE_FIELDS:
+            a, b = _graph_norm(key, fa.get(key)), _graph_norm(key, fb.get(key))
+            if a is not None and a == b:
+                out.append(key)
+        return out
+
+    fields_by_id: dict[str, dict[str, str | None]] = {}
     entities: dict[str, dict] = {}
     nodes: list[dict] = []
     for d, res in parsed:
-        key, name = entity_key(res)
+        key, name = entity_key(d, res)
         if key not in entities:
             rec = golden.by_ticker(res.record.ticker) or golden.by_isin(res.record.isin)
+            ent_fields = {"emissor": _graph_fmt(name), "ticker": _graph_fmt(rec.ticker if rec else res.record.ticker)}
             entities[key] = {
                 "id": f"entity:{key}",
                 "kind": "entity",
@@ -334,7 +412,11 @@ def build_project_graph(session: Session, project_id: str, golden: GoldenBase) -
                 "ticker": rec.ticker if rec else res.record.ticker,
                 "segment": rec.segmento_listagem if rec else None,
                 "known": rec is not None,
+                "fields": ent_fields,
             }
+            fields_by_id[entities[key]["id"]] = ent_fields
+        df = doc_fields(res)
+        fields_by_id[d.id] = df
         nodes.append({
             "id": d.id,
             "kind": "document",
@@ -348,35 +430,56 @@ def build_project_graph(session: Session, project_id: str, golden: GoldenBase) -
             "human_status": d.human_status,
             "dq_score": res.validation.dq_score.score,
             "golden_status": res.validation.golden_match.status.value,
+            "fields": df,
         })
     nodes.extend(entities.values())
 
     edges: list[dict] = []
     for d, res in parsed:
-        key, _ = entity_key(res)
-        edges.append({"source": d.id, "target": entities[key]["id"], "type": "belongs_to", "label": "pertence a"})
+        key, _ = entity_key(d, res)
+        ent_id = entities[key]["id"]
+        edges.append({
+            "source": d.id, "target": ent_id, "type": "belongs_to", "label": "pertence ao emissor",
+            "shared": shared(fields_by_id[d.id], fields_by_id[ent_id]),
+        })
 
     for i in range(len(parsed)):
         di, ri = parsed[i]
-        ki, _ = entity_key(ri)
+        ki, _ = entity_key(di, ri)
         for j in range(i + 1, len(parsed)):
             dj, rj = parsed[j]
-            kj, _ = entity_key(rj)
+            kj, _ = entity_key(dj, rj)
+            sf = shared(fields_by_id[di.id], fields_by_id[dj.id])
             ti, tj = ri.event_type.argmax, rj.event_type.argmax
             same_type = ti == tj and not ti.is_ambiguous
+            same_issuer = ki == kj and not ki.startswith("unknown:")
             same_sec = bool(
                 (ri.record.isin and ri.record.isin == rj.record.isin)
                 or (ri.record.ticker and ri.record.ticker == rj.record.ticker)
             )
-            same_issuer = ki == kj and ki != "desconhecido"
-            if same_issuer and same_type:
-                edges.append({"source": di.id, "target": dj.id, "type": "possible_duplicate",
-                              "label": f"possível duplicidade ({ti.value})"})
-            elif same_sec:
-                edges.append({"source": di.id, "target": dj.id, "type": "same_security",
-                              "label": "mesmo ativo (ISIN/ticker)"})
-            elif same_type:
-                edges.append({"source": di.id, "target": dj.id, "type": "same_event_type",
-                              "label": f"mesmo tipo ({ti.value})"})
+            # A duplicate needs more than the same type: an overlapping date or the same value.
+            dup_signal = same_type and any(k in sf for k in GRAPH_DUP_KEYS)
 
-    return {"nodes": nodes, "edges": edges}
+            if same_issuer and dup_signal:
+                edge = {"source": di.id, "target": dj.id, "type": "possible_duplicate",
+                        "label": f"possível duplicidade ({ti.value})"}
+            elif same_sec:
+                edge = {"source": di.id, "target": dj.id, "type": "same_security",
+                        "label": "mesmo ativo (ISIN/ticker)"}
+            elif same_issuer and same_type:
+                # Same issuer + same type, but not a duplicate (e.g. a recurring provento).
+                edge = {"source": di.id, "target": dj.id, "type": "same_event_type",
+                        "label": f"mesmo emissor · mesmo tipo ({ti.value})"}
+            else:
+                # Cross-issuer "same category" is noise, not traceability → draw nothing.
+                continue
+
+            if edge["type"] in ("same_event_type", "possible_duplicate") and (
+                type_provisional(ri) or type_provisional(rj)
+            ):
+                edge["provisional"] = True
+                edge["label"] += " · tipo em revisão"
+            edge["shared"] = sf
+            edges.append(edge)
+
+    return {"nodes": nodes, "edges": edges, "field_meta": [{"key": k, "label": v} for k, v in GRAPH_COMPARE_FIELDS]}

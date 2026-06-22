@@ -1,18 +1,35 @@
-# Asset Servicing Agent — Extração Auditável de Eventos Corporativos
+<p align="center">
+  <img src="frontend/assets/logo.png" alt="CAA — Corporate Actions Agent" width="116" />
+</p>
 
-> Case Técnico AI Developer · BTG Pactual (Asset Servicing)
+<h1 align="center">CAA — Corporate Actions Agent</h1>
 
-Agente **code-first** que recebe um lote de avisos de eventos corporativos
-(proventos, JCP, bonificações, grupamentos — PDFs nativos e escaneados) e produz,
-para cada documento, um **registro estruturado validado com tratamento de
-incerteza**: o que foi extraído, **de onde** (proveniência), **quão confiável** é
-cada campo, o resultado da **validação contra a base de referência**, e **o que
-precisa de revisão humana e por quê** — tudo auditável sem reabrir o documento.
+<p align="center">
+  <strong>Extração auditável de eventos corporativos com tratamento de incerteza e human-in-the-loop.</strong><br/>
+  <sub>Proventos · JCP · Bonificações · Grupamentos — PDFs nativos e escaneados (B3/CVM)</sub>
+</p>
 
-A arquitetura reaproveita, num domínio financeiro, a mesma espinha mental de uma
-PoC que construí para migração de COBOL: **classificação semântica com
+---
+
+O **CAA (Corporate Actions Agent)** é um agente **code-first** que recebe um lote de
+avisos de eventos corporativos e produz, para cada documento, um **registro
+estruturado validado com tratamento de incerteza**: o que foi extraído, **de onde**
+(proveniência), **quão confiável** é cada campo, o resultado da **validação contra a
+base de referência**, e **o que precisa de revisão humana e por quê** — tudo
+auditável sem reabrir o documento.
+
+A arquitetura aplica, num domínio financeiro (B3/CVM), uma espinha mental madura
+(reaproveitada de uma PoC de migração de COBOL): **classificação semântica com
 distribuição probabilística + guardrails determinísticos + human-in-the-loop +
 rastreabilidade auditável end-to-end**.
+
+## Entregáveis
+
+- **Repositório com o código** + **instruções de execução** neste README (ver **TL;DR** logo abaixo).
+- **README com as decisões de arquitetura**, incluindo explicitamente **o que decidi _não_ fazer e por quê** — ver **§9 (Trade-offs)**, detalhado.
+- **`outputs/`** — o entregável de dados: um **JSON auditável por documento** + **relatório de exceções** + **run summary** (ver **§2 — Data contract**).
+- **Console CAA** (human-in-the-loop) — produto React para revisar / corrigir / aprovar, com **exportação em PDF** (certificado + relatório) e **grafo de rastreabilidade**.
+- **Telas da aplicação** — ver **§ Telas (screenshots)**.
 
 ---
 
@@ -41,7 +58,7 @@ Ou passo a passo:
 # 1) Backend (offline, sem API key: usa um extrator-stub determinístico)
 cd backend && uv sync --extra dev
 uv run asset-agent run            # gera outputs/ (JSONs + relatório de exceções)
-uv run pytest -q                  # 34 testes
+uv run pytest -q                  # 49 testes
 
 # 2) Com Gemini (free tier) — extração real por LLM + visão no escaneado
 echo "GOOGLE_API_KEY=xxx" > ../.env
@@ -55,9 +72,12 @@ make web                          # CAA em :5173
 #    revise/aprove documento a documento e gere a documentação auditável.
 ```
 
-Sem `GOOGLE_API_KEY`, todo o pipeline roda **100% offline** com um extrator
-heurístico determinístico — o que torna os outputs e os testes **reproduzíveis
-sem gastar quota**. Com a key, o mesmo pipeline usa **Gemini** (texto + visão).
+O `outputs/` commitado é o run **real com Gemini** (texto + visão), reproduzível
+offline via cache (`asset-agent run --provider gemini --replay`, sem gastar quota).
+A aplicação **sempre prefere o Gemini** quando há `GOOGLE_API_KEY`, degradando
+automaticamente para o extrator **stub** offline (determinístico, com **OCR
+Tesseract** no escaneado) apenas se faltar a chave **ou** a quota/free tier esgotar
+— o fallback é por documento, então um esgotamento de quota não derruba o lote.
 
 ---
 
@@ -150,39 +170,51 @@ Ver [confidence.py](backend/app/agent/confidence.py) e
 - **HUMAN_REVIEW** — emissor desconhecido · campo obrigatório ausente · tipo ambíguo/entropia alta · falha de coerência crítica (datas, JCP, substância) · campo de baixa confiança · valor sem âncora · DQ baixo · documento escaneado.
 - **AUTO_APPROVE** — todos os guardrails passam, identidade confirmada, campos confiáveis e DQ alto.
 
-### Resultado sobre o lote (offline stub — reproduzível com `make run`)
+### Resultado sobre o lote (run **Gemini** — canônico em `outputs/`)
+
+Processado com **`gemini-2.5-flash`** (texto + **visão** no doc 07 escaneado):
+**4 auto-aprovados / 4 revisão**, confiança média **97%**.
 
 | Documento | Tipo | Decisão | Gatilho |
 |---|---|---|---|
 | 01 energética vale tietê | DIVIDENDO | **AUTO** | limpo, golden EXACT |
 | 02 banco meridional | JCP | **AUTO** | bruto/líquido coerentes (IRRF 17,5%) |
-| 03 siderúrgica paranaense | DIVIDENDO→**JCP?** | **REVIEW** | substância de JCP sob título de dividendo |
+| 03 siderúrgica paranaense | **JCP** | **AUTO** | LLM classifica pela substância (título "Dividendos") |
 | 04 rede varejo (sem data) | JCP | **REVIEW** | `data_pagamento` ausente ("A definir") |
 | 05 aurora saneamento | DIVIDENDO | **REVIEW** | incoerência de datas (pagamento antes da ex) |
 | 06 petroquímica litoral | GRUPAMENTO | **AUTO** | proporção 10:1, limpo |
-| 07 telecom norte (SCAN) | — | **REVIEW** | escaneado → visão/leitura humana |
+| 07 telecom norte (SCAN) | JCP | **REVIEW** | escaneado lido por **Gemini Vision** → confere |
 | 08 construtora horizonte | BONIFICAÇÃO | **REVIEW** | emissor fora da base de referência |
 
-### Execução real com Gemini (run ao vivo)
+**Destaques do LLM:** doc 03 (a "armadilha") — classificado corretamente como
+**JCP** pela substância (o stub heurístico dizia DIVIDENDO), auto-aprovado coerente;
+doc 07 (escaneado) — a **visão** lê o aviso e extrai os 13 campos (todas as datas
+corretas).
 
-O lote também foi processado ao vivo com **`gemini-2.5-flash`** (texto + **visão**
-no doc 07 escaneado). Resultados em [outputs/gemini_run/](outputs/gemini_run/):
+### Run offline (stub) — alternativa 100% reproduzível sem key
 
-- **Doc 03 (a "armadilha")** → o LLM classificou corretamente como **JCP** pela
-  substância (o stub heurístico dizia DIVIDENDO) → auto-aprovado coerente. Ótima
-  demonstração do valor do LLM sobre a heurística.
-- **Doc 07 (escaneado)** → a **visão** leu o aviso (JCP) → revisão (scan sempre confere).
-- **4 auto / 3 revisão** (de 7). O doc 08 não completou por **limite do free tier**
-  (cota diária esgotada após ~21 chamadas) — capturado pela resiliência do batch
-  (uma falha por documento não derruba o lote).
+Sem `GOOGLE_API_KEY`, o mesmo lote roda com o extrator heurístico determinístico
+(escaneado via **OCR Tesseract**): **3 auto / 5 revisão** — a única diferença é o
+doc 03, que a heurística mantém em revisão (não infere JCP pela substância como o
+LLM). É o caminho usado pelos testes e por `./run.sh` sem key.
 
-O `outputs/` canônico é o run **offline (stub)**, completo (8 docs) e 100%
-reproduzível (`./run.sh` sem key). O run do Gemini é reproduzível offline via
-`asset-agent run --provider gemini --replay --n 3` (cache commitado em `.cache/`).
+O `outputs/` commitado é o run **Gemini**, reproduzível offline via
+`asset-agent run --provider gemini --replay` (cache commitado em `.cache/`).
 
 ## 6. Produto: CAA — Corporate Actions Agent (human-in-the-loop)
 
 React + Vite + TS ([frontend/](frontend/)). O fluxo é orientado a **projetos**:
+
+```mermaid
+flowchart LR
+  P[Projeto<br/>criar/renomear] --> U[Arquivos<br/>upload de PDFs]
+  U --> A[Realizar análise<br/>roda o pipeline]
+  A --> R{Análise por doc<br/>imagem + campos + confiança}
+  R -->|aprovar| OK[(registro final<br/>+ auditoria)]
+  R -->|corrigir| RV[revalidação<br/>determinística] --> R
+  R -->|rejeitar| OK
+  OK --> D[Documentação<br/>relatório + PDF + grafo]
+```
 
 1. **Projetos** — criar / **renomear** / **excluir**; cada projeto tem estado
    (`Rascunho → Em análise → Em revisão → Concluído`) e progresso (`X/N decididos`).
@@ -193,37 +225,85 @@ React + Vite + TS ([frontend/](frontend/)). O fluxo é orientado a **projetos**:
    (quote/bbox), distribuição de tipo, **golden match explicável**, guardrails e
    **trilha de auditoria**. Aprovar / corrigir / rejeitar por documento.
 4. **Documentação** — relatório auditável (resumo, decisão por doc, **o que foi
-   corrigido e por quem**, registros finais), exportável em JSON.
+   corrigido e por quem**, registros finais), exportável em **JSON** e **PDF com a
+   identidade visual da CAA** (certificado por documento aprovado + relatório
+   consolidado do projeto, via WeasyPrint), além de um **grafo de rastreabilidade**
+   que mostra como os documentos se relacionam (mesmo emissor, mesmo tipo de
+   evento, possíveis duplicatas) com evidência campo a campo.
 
 Corrigir um campo dispara **revalidação** determinística (ex.: corrigir a data de
 pagamento do doc 05 leva `HUMAN_REVIEW → AUTO_APPROVE`) e grava no log *append-only*.
 
-**Leitura de escaneados (OCR/visão):** documentos sem camada de texto (doc 07) são
-renderizados em imagem e lidos pelo **Gemini Vision** — um VLM que faz o
-reconhecimento do texto **e** a extração estruturada em uma única etapa. Não há
-motor de OCR clássico (Tesseract) por decisão de escopo; a UI sinaliza isso
-explicitamente no documento escaneado (e, offline com o stub, indica que o OCR não
-foi executado → revisão humana).
+**Leitura de escaneados — visão e OCR se complementam:** num scan (doc 07) duas
+fontes *independentes* leem a mesma página e se complementam:
+- **Gemini Vision** lê a imagem e devolve os valores estruturados + *quote* (boa
+  acurácia, entende layout/tabela; resolve a armadilha de *dotted leaders*);
+- **Tesseract** (`por+eng`) transcreve a imagem em texto **com bounding boxes**.
+
+O sistema funde os dois: (1) **ancora** cada valor da visão na palavra/bbox do OCR
+(proveniência `VISION+OCR`, com caixa na página — que a visão sozinha não dá);
+(2) **verifica** o valor da visão contra o texto do OCR (groundedness/anti-
+alucinação); e (3) roda o extrator determinístico sobre o texto do OCR como um
+**voto independente** — um guardrail `vision_ocr_crosscheck` escala divergências
+visão↔OCR em campos críticos para revisão. Offline (sem Gemini), o Tesseract
+sozinho sustenta a extração. O método efetivo (`gemini_vision` ou `tesseract_ocr`)
+é registrado por documento, e o scan é sempre roteado para conferência humana.
+
+## Telas (screenshots)
+
+> Console CAA (human-in-the-loop) processando o lote "Eventos B3 — Junho/2026".
+
+### 1 · Projetos
+Lista de projetos com estado e progresso (`X/N decididos`); operador identificado para a auditoria.
+![Projetos](docs/screenshots/projetos.png)
+
+### 2 · Arquivos
+Upload de PDFs (arrastar/soltar ou carregar amostras) e disparo da análise.
+![Arquivos](docs/screenshots/arquivos.png)
+
+### 3 · Análise — visão geral do lote
+Auto-aprovados vs. revisão, confiança média, **mix de tipos** e **motivos de exceção** (observabilidade), com a fila de documentos.
+![Análise — visão geral](docs/screenshots/analise_1.png)
+
+### 4 · Análise — documento (imagem + campos + confiança + proveniência)
+Imagem da página ao lado dos campos extraídos — cada um com confiança *color-coded*, **fonte da evidência**, *quote* e bbox.
+![Análise — documento](docs/screenshots/analise_2.png)
+
+### 5 · Validação — golden match, guardrails e auditoria
+Entity resolution explicável contra a base, guardrails determinísticos (com checksums advisórios) e a **trilha de auditoria** *append-only*.
+![Validação](docs/screenshots/golden_match.png)
+
+### 6 · Rastreabilidade — grafo
+Como os documentos se relacionam (mesmo emissor, mesmo tipo, mesmo ativo, possível duplicidade) com evidência campo a campo.
+![Grafo de rastreabilidade](docs/screenshots/grafo.png)
+
+### 7 · Documentação
+Relatório auditável do projeto (resumo, decisão por doc, correções, registros finais), exportável em JSON/PDF.
+![Documentação](docs/screenshots/documentacao.png)
+
+### 8 · Certificado em PDF (identidade visual CAA)
+Certificado por documento aprovado: identidade, entity resolution, classificação/DQ e procedência.
+![Certificado PDF](docs/screenshots/pdf_documentacao.png)
 
 ## 7. Estrutura do repositório
 
 ```
 backend/app/
   domain/        # enums, schemas (data contract), parsing BR, golden loader
-  extraction/    # PyMuPDF (nativo/scan, bbox, render p/ visão), proveniência (fuzzy → bbox)
+  extraction/    # PyMuPDF (nativo/scan, bbox), OCR Tesseract (escaneado), proveniência (fuzzy → bbox)
   llm/           # boundary: base, cache (replay), gemini (visão), stub, prompts, factory
-  agent/         # self-consistency, confiança, assembly, routing, LangGraph
+  agent/         # self-consistency, confiança, assembly, crossmodal (visão×OCR), routing, LangGraph
   guardrails/    # runner + tools (function calling)
   validation/    # identificadores, coerência, golden match, groundedness, DQ
   persistence/   # Postgres (SQLAlchemy): projetos + documentos + audit append-only + revalidação HITL
-  api/           # FastAPI: projetos, upload, analyze, review, audit, pdf/page.png, report
-  output/        # writer (JSONs + relatório + run summary) ; cli.py
+  api/           # FastAPI: projetos, upload, analyze, review, audit, graph, page.png, PDFs (certificado/relatório)
+  output/        # writer (JSONs + relatório + run summary), PDF CAA (certificado/relatório) ; cli.py
 backend/tests/   # testes (unit + integração sobre o lote + API + lifecycle de projeto)
 frontend/src/    # CAA: App (router por abas), views (projetos/upload/documentação),
-                 #      ReviewConsole (análise), components, api, types
+                 #      ReviewConsole (análise), GraphPanel (rastreabilidade), components, icons, api, types
 infra/           # docker-compose (Postgres + API + web) ; Makefile ; run.sh
 uploads/         # PDFs enviados, por projeto (gitignored)
-outputs/         # ENTREGÁVEL: JSONs + exceptions_report.{md,json} + run_summary.json ; outputs/gemini_run/
+outputs/         # ENTREGÁVEL: JSONs + exceptions_report.{md,json} + run_summary.json
 ```
 
 ## 8. Escala & Produção (design — **não implementado**, escopo de fim de semana)
@@ -239,14 +319,78 @@ A estrutura já é orientada a orquestração, então escalar de 8 docs para mil
 
 ## 9. Trade-offs — o que decidi **não** fazer (e por quê)
 
-- **Sem auth/RBAC/multi-tenant** — identidade de operador *mockada* só para a auditoria; fora do escopo do case.
-- **Sem vector DB / RAG** — a base de referência é minúscula; match exato + fuzzy é mais simples, rápido e auditável.
-- **Sem fine-tuning** — *prompt + structured output + self-consistency* bastam e são defensáveis.
-- **HITL por persist-and-revalidate**, não `interrupt()` + checkpointer LangGraph — mais simples e depurável ao vivo; o grafo e o checkpointer Postgres ficam prontos para a versão durável (documentado, não foi o caminho default).
-- **Sem overlay pixel-perfect de bbox no PDF** — o PDF é exibido em `iframe` e a proveniência (quote + página + bbox) aparece no card do campo; o overlay em canvas (pdf.js) fica como evolução.
-- **OCR pragmático** — um único escaneado tratado por visão do Gemini; sem robustez OCR genérica para qualquer scan.
-- **Escala (Airflow/Spark) é documentada, não implementada** — tempo de fim de semana priorizou profundidade do núcleo + console.
-- **Dígitos verificadores advisórios** — decisão calibrada nos dados (ver §4); em produção, escalaria.
+> **Profundidade > amplitude.** Num escopo de fim de semana, escolhi **aprofundar o
+> núcleo que define a qualidade de um agente de Asset Servicing** — confiança
+> calibrada, proveniência, guardrails determinísticos e human-in-the-loop — em vez de
+> espalhar features rasas. Cada "não" abaixo é uma **decisão de engenharia
+> consciente**, com o caminho de produção mapeado.
+
+**1. HITL por _persist-and-revalidate_, não `interrupt()` + checkpointer LangGraph.**
+Quando o operador corrige um campo, eu **persisto a correção e re-rodo os guardrails
+determinísticos** (revalidação), em vez de suspender o grafo num checkpoint durável.
+_Por quê:_ é mais simples, depurável ao vivo e transparente — a correção do doc 05
+(data de pagamento) leva `HUMAN_REVIEW → AUTO_APPROVE` na hora, e tudo fica no log
+*append-only*. _Produção:_ o grafo LangGraph e o checkpointer Postgres já estão
+estruturados; migrar para `interrupt()` durável é incremental quando houver fila/SLA
+de revisão.
+
+**2. Sem autenticação / RBAC / multi-tenant.**
+A identidade do operador é *mockada* só para carimbar a auditoria. _Por quê:_ auth é
+um problema resolvido (OIDC/SSO) e **ortogonal** ao que o case avalia (qualidade da
+extração e do juízo). _Produção:_ entra atrás de um gateway com SSO + RBAC por papel
+(operador vs. auditor) — o log *append-only* já está pronto para receber a identidade
+real.
+
+**3. Sem vector DB / RAG.**
+A base de referência (`golden_records.csv`) é minúscula e **estruturada**. _Por quê:_
+match exato + *fuzzy* + *entity resolution* explicável é mais simples, mais rápido e
+**mais auditável** que recuperar por similaridade vetorial (que traria respostas
+"prováveis" difíceis de justificar a um auditor). RAG só se justifica com base de
+conhecimento grande e textual — não é o caso.
+
+**4. Sem fine-tuning.**
+*Prompt design + structured output + self-consistency* já entregam classificação
+calibrada e defensável. _Por quê:_ fine-tuning exigiria dados rotulados,
+versionamento de modelo e re-treino — investimento que só compensa com volume e
+*drift* comprovados, e que adiciona opacidade num domínio onde preciso **explicar**
+cada decisão.
+
+**5. OCR híbrido pragmático, não um motor OCR genérico.**
+O escaneado é **lido pela visão do Gemini e ancorado/verificado pelo Tesseract**
+(`por+eng`, bbox + voto cruzado). _Por quê:_ é afinado para o aviso do lote, **não**
+uma pipeline OCR robusta a qualquer layout/rotação/caligrafia — generalizar exigiria
+deskew, modelos de layout e tabelas. _Produção:_ a arquitetura isola isso atrás de
+`extraction/`, então trocar/robustecer o motor é uma mudança local.
+
+**6. Sem overlay _pixel-perfect_ de bbox sobre o PDF.**
+A proveniência (quote + página + **bbox**) aparece no card do campo e a imagem da
+página é exibida ao lado; não desenho o retângulo exato sobre a página. _Por quê:_
+o dado do bbox **já existe** no contrato — o overlay em canvas (pdf.js) é só camada de
+UI, deixada como evolução de baixo risco.
+
+**7. Escala (Airflow + Spark) é desenho, não código.**
+A estrutura **já é orientada a orquestração** (1 doc = 1 task, idempotência por
+`doc_hash`, tiers determinístico/LLM separados — ver §8), mas o DAG real não foi
+implementado. _Por quê:_ priorizei **provar o núcleo + o console ponta a ponta**.
+Escalar a partir daqui é incremental, não uma reescrita.
+
+**8. Dígitos verificadores (ISIN/CNPJ) tratados como _advisórios_.**
+Decisão **calibrada nos dados**: na base sintética só 2/12 ISIN e 1/12 CNPJ passam o
+*check digit*. _Por quê:_ logo a **base de referência é o oráculo de identidade** e o
+checksum é informativo (já `ticker↔classe`, 12/12 confiável, é autoritativo).
+_Produção:_ com identificadores reais, um checksum inválido **escalaria** — é um
+parâmetro, não uma crença.
+
+**9. Self-consistency com N pequeno (2–5), não dezenas de amostras.**
+Mais amostras calibram melhor a confiança, mas custam quota linearmente. _Por quê:_
+N=5 (default) equilibra sinal e custo no *free tier*; o número é um *setting*
+documentado em [settings.py](backend/app/config/settings.py), não mágico.
+
+**10. O _stub_ determinístico é cidadão de primeira classe (de propósito).**
+Manter um extrator heurístico offline não é "preguiça": é o que torna **testes e
+outputs reproduzíveis sem gastar quota** e dá um **fallback** real quando o Gemini
+fica sem cota (degradação por documento, sem derrubar o lote). Provider e reprodução
+ficam **desacoplados** do núcleo — uma propriedade de arquitetura, não um atalho.
 
 ## 10. Glossário (nomeando as técnicas)
 
@@ -263,11 +407,13 @@ estável p/ downstream) · **Idempotency / backfill** (`doc_hash` → re-run seg
 | `make install` | instala o backend (uv) |
 | `make run` | roda o lote → `outputs/` (offline se não houver key) |
 | `make replay` | reproduz do cache, sem chamadas ao LLM |
-| `make test` | 29 testes |
+| `make test` | 49 testes |
 | `make api` / `make web` | API (:8000) e console (:5173) |
 | `make db-up` | sobe o Postgres (docker) |
 
-Provider: `auto` (Gemini se `GOOGLE_API_KEY`, senão `stub`). Modelo: `gemini-2.5-flash`
+Provider: `auto` (Gemini se `GOOGLE_API_KEY`, senão `stub`); **sempre prefere o
+Gemini** e cai no `stub` offline só quando falta a chave ou a quota/free tier
+esgota (fallback por documento). Modelo: `gemini-2.5-flash`
 (o free tier dos modelos 2.0/1.5 estava indisponível neste projeto — limite 0 / 404).
 Persistência: `DATABASE_URL` (Postgres por padrão; aceita `sqlite:///...` para rodar
 sem Docker).

@@ -201,6 +201,8 @@ export interface GraphNode {
   // entity-only
   segment?: string | null;
   known?: boolean;
+  // comparable record fields (key -> display value)
+  fields?: Record<string, string | null>;
 }
 
 export type GraphEdgeType =
@@ -214,9 +216,19 @@ export interface GraphEdge {
   target: string;
   type: GraphEdgeType;
   label?: string;
+  // record fields whose values are identical on both ends (the relationship evidence)
+  shared?: string[];
+  // the link is derived from a contested event type (substance conflict) → provisional
+  provisional?: boolean;
+}
+
+export interface GraphFieldMeta {
+  key: string;
+  label: string;
 }
 
 export interface GraphData {
   nodes: GraphNode[];
   edges: GraphEdge[];
+  field_meta?: GraphFieldMeta[];
 }

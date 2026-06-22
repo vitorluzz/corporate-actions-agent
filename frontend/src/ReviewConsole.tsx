@@ -10,6 +10,15 @@ import {
   GuardrailList,
   useDraft,
 } from "./components";
+import {
+  IconArrowRight,
+  IconCheckCircle,
+  IconDocument,
+  IconDownload,
+  IconFlag,
+  IconScan,
+  IconXCircle,
+} from "./icons";
 import type {
   AuditEvent,
   DocumentListItem,
@@ -35,7 +44,8 @@ export default function AnalysisPanel({
   const [audit, setAudit] = useState<AuditEvent[]>([]);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const { draft, onChange, reset } = useDraft();
+  const [notice, setNotice] = useState<string | null>(null);
+  const { draft, onChange, reset, resetField } = useDraft();
 
   async function loadList() {
     try {
@@ -66,6 +76,7 @@ export default function AnalysisPanel({
 
   async function submit(decision: ReviewBody["decision"]) {
     if (!selected || !result) return;
+    setNotice(null);
     setBusy(true);
     try {
       const corrections: Record<string, string> = {};
@@ -83,6 +94,13 @@ export default function AnalysisPanel({
   }
 
   async function finalize() {
+    if (pending > 0) {
+      setNotice(
+        `Ainda há ${pending} documento(s) pendente(s). Aprove ou rejeite todos os documentos da fila antes de finalizar a análise.`,
+      );
+      return;
+    }
+    setNotice(null);
     setBusy(true);
     try {
       await api.completeProject(pid);
@@ -100,6 +118,9 @@ export default function AnalysisPanel({
     docs.filter((d) => d.decision !== "AUTO_APPROVE" && !d.human_status).length;
   const decided = total - pending;
   const flagged = useMemo(() => docs.filter((d) => d.decision !== "AUTO_APPROVE"), [docs]);
+  const changedCount = result
+    ? result.fields.filter((f) => draft[f.name] !== undefined && draft[f.name] !== (f.value ?? "")).length
+    : 0;
 
   if (docs.length === 0) {
     return (
@@ -113,6 +134,11 @@ export default function AnalysisPanel({
   return (
     <>
       {error && <div className="error">{error}</div>}
+      {notice && (
+        <div className="banner notice-banner" role="alert">
+          <IconFlag size={15} /> {notice}
+        </div>
+      )}
 
       <div className="panel-bar">
         <span className="progress-pill">
@@ -122,12 +148,12 @@ export default function AnalysisPanel({
           {decided}/{total} decididos
         </span>
         <button
-          className="btn ok"
+          className="btn primary"
           onClick={finalize}
-          disabled={busy || pending > 0 || total === 0}
-          title={pending > 0 ? `${pending} documento(s) pendente(s)` : "Concluir e gerar a documentação"}
+          disabled={busy || total === 0}
+          title={pending > 0 ? `Aprove os ${pending} documento(s) pendente(s) antes de finalizar` : "Concluir e gerar a documentação"}
         >
-          Finalizar análise →
+          Finalizar análise <IconArrowRight size={16} />
         </button>
       </div>
 
@@ -168,11 +194,32 @@ export default function AnalysisPanel({
                     {result.document.model} · hash {result.document.doc_hash}
                   </span>
                 </div>
-                <DecisionBadge decision={result.routing.decision} />
+                <div className="review-h-actions">
+                  <DecisionBadge decision={result.routing.decision} />
+                  {(result.human_status === "APPROVED" ||
+                    (result.routing.decision === "AUTO_APPROVE" && !result.human_status)) && (
+                    <button
+                      className="btn sm"
+                      title="Baixar certificado de análise (PDF)"
+                      onClick={() =>
+                        api.certificatePdf(
+                          result.document.id,
+                          `CAA_certificado_${result.document.source_file.replace(/\.pdf$/i, "")}.pdf`,
+                        )
+                      }
+                    >
+                      <IconDownload size={15} /> Certificado (PDF)
+                    </button>
+                  )}
+                </div>
               </div>
 
               <div className="review-grid">
-                <div className="pdf-pane">
+                <div className="pdf-pane bracket-frame">
+                  <span className="bracket tl" />
+                  <span className="bracket tr" />
+                  <span className="bracket bl" />
+                  <span className="bracket br" />
                   <img
                     className="pdf-img"
                     src={api.pageImageUrl(result.document.id)}
@@ -183,23 +230,29 @@ export default function AnalysisPanel({
                 <div className="fields-pane">
                   {result.document.doc_class === "SCANNED" && (
                     <div className="scan-notice">
-                      <span className="scan-icon">📷</span>
+                      <span className="scan-icon"><IconScan size={22} /></span>
                       <div>
                         <strong>Documento escaneado (imagem)</strong>
                         <p>
-                          Este aviso não possui camada de texto, então a captura direta de texto não é
-                          possível. A leitura foi feita por <strong>OCR / visão computacional</strong>
-                          {result.document.extraction_method.includes("vision") ? " (Gemini Vision)" : ""}.{" "}
+                          Este arquivo não possui camada de texto. A leitura foi feita por{" "}
+                          <strong>
+                            {result.document.extraction_method === "tesseract_ocr"
+                              ? "OCR (Tesseract)"
+                              : result.document.extraction_method.includes("vision")
+                                ? "visão computacional (Gemini Vision)"
+                                : "leitura automática"}
+                          </strong>
+                          .{" "}
                           {result.fields.filter((f) => f.value).length > 1
-                            ? "Confira cada valor contra a imagem ao lado."
-                            : "Neste ambiente offline (sem chave de API) o OCR não foi executado — leia pela imagem e valide/preencha manualmente."}
+                            ? "Os campos foram extraídos por OCR e podem conter ruído de leitura — confira cada valor contra a imagem ao lado."
+                            : "A leitura automática não recuperou texto suficiente — leia pela imagem e valide/preencha manualmente."}
                         </p>
                       </div>
                     </div>
                   )}
                   {result.routing.reasons.length > 0 && (
                     <div className="card reasons">
-                      <div className="card-h">Por que precisa de atenção</div>
+                      <div className="card-h"><IconFlag size={15} /> Por que precisa de atenção</div>
                       <ul>{result.routing.reasons.map((r, i) => <li key={i}>{r}</li>)}</ul>
                       {result.routing.required_human_actions.length > 0 && (
                         <>
@@ -216,12 +269,12 @@ export default function AnalysisPanel({
 
                   <div className="card">
                     <div className="card-h">
-                      Campos extraídos
-                      <span className="muted"> · DQ {result.validation.dq_score.score.toFixed(2)} · edite para corrigir</span>
+                      <IconDocument size={15} /> Campos extraídos
+                      <span className="muted"> · DQ {result.validation.dq_score.score.toFixed(2)} · edite qualquer valor incorreto e salve/aprove</span>
                     </div>
                     <div className="fields-grid">
                       {result.fields.map((f) => (
-                        <FieldCard key={f.name} f={f} draft={draft[f.name]} onChange={onChange} />
+                        <FieldCard key={f.name} f={f} draft={draft[f.name]} onChange={onChange} onReset={resetField} />
                       ))}
                     </div>
                   </div>
@@ -231,14 +284,19 @@ export default function AnalysisPanel({
                   <AuditTrail events={audit} />
 
                   <div className="review-actions">
-                    <button className="btn ghost" onClick={() => submit("save")} disabled={busy}>
+                    {changedCount > 0 && (
+                      <span className="changed-note">
+                        {changedCount} campo{changedCount === 1 ? "" : "s"} alterado{changedCount === 1 ? "" : "s"} — salve ou aprove para revalidar
+                      </span>
+                    )}
+                    <button className="btn ghost" onClick={() => submit("save")} disabled={busy || changedCount === 0}>
                       Salvar correções
                     </button>
                     <button className="btn bad" onClick={() => submit("reject")} disabled={busy}>
-                      Rejeitar
+                      <IconXCircle size={16} /> Rejeitar
                     </button>
                     <button className="btn ok" onClick={() => submit("approve")} disabled={busy}>
-                      Aprovar registro
+                      <IconCheckCircle size={16} /> Aprovar registro
                     </button>
                   </div>
                 </div>

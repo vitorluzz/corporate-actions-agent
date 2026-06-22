@@ -13,6 +13,7 @@ from dataclasses import dataclass
 from rapidfuzz import fuzz
 
 from app.agent.confidence import fuse_field_confidence
+from app.agent.crossmodal import CrossModal
 from app.agent.selfconsistency import Consensus, FieldConsensus
 from app.config.settings import Settings
 from app.domain.enums import EvidenceSource
@@ -67,26 +68,42 @@ def _coerce(attr: str, value: str | None):
 
 
 def _evidence_for(
-    fc: FieldConsensus, doc: LoadedDocument, settings: Settings
+    fc: FieldConsensus, doc: LoadedDocument, settings: Settings, *, vision_anchored: bool
 ) -> tuple[Evidence | None, float]:
     if doc.doc_class.name == "SCANNED":
+        # OCR'd scan: anchor the value in the OCR text/word-boxes (real bbox + groundedness).
+        if doc.full_text.strip():
+            ev, score = build_evidence(fc.value, fc.quote, doc)
+            if ev is not None:
+                # When the value was read by vision and *located* via OCR word boxes,
+                # the lineage is the complement of both modalities.
+                if vision_anchored and ev.source is EvidenceSource.OCR:
+                    ev = ev.model_copy(update={"source": EvidenceSource.VISION_OCR})
+                return ev, score
+        # Pure vision (no OCR), or value not locatable → quote-only evidence.
         if not fc.value:
             return None, 0.0
+        ocr = bool(doc.full_text.strip())
         score = fuzz.partial_ratio(fc.value.lower(), (fc.quote or "").lower()) / 100.0 if fc.quote else 0.5
         return (
-            Evidence(source=EvidenceSource.VISION, quote=fc.quote, page=fc.page,
-                     match_score=round(score, 4)),
+            Evidence(source=EvidenceSource.OCR if (ocr and not vision_anchored) else EvidenceSource.VISION,
+                     quote=fc.quote, page=fc.page, match_score=round(score, 4)),
             score,
         )
     return build_evidence(fc.value, fc.quote, doc)
 
 
 def assemble(
-    consensus: Consensus, doc: LoadedDocument, settings: Settings
+    consensus: Consensus,
+    doc: LoadedDocument,
+    settings: Settings,
+    crossmodal: dict[str, CrossModal] | None = None,
 ) -> tuple[Record, list[ExtractedField], list[FieldSignals]]:
     record_kwargs: dict = {"tipo_evento": consensus.event_type.argmax}
     fields: list[ExtractedField] = []
     signals: list[FieldSignals] = []
+    cms = crossmodal or {}
+    vision_anchored = bool(cms)  # cross-modal map only exists for vision-read scans
 
     for fc in consensus.fields:
         attr = _RECORD_MAP.get(fc.name)
@@ -94,7 +111,15 @@ def assemble(
         if attr and typed is not None:
             record_kwargs[attr] = typed
 
-        evidence, ground_score = _evidence_for(fc, doc, settings)
+        evidence, ground_score = _evidence_for(fc, doc, settings, vision_anchored=vision_anchored)
+
+        # Multimodal fusion: an independent OCR vote that *agrees* with vision is
+        # strong corroboration → treat the value as grounded and lift the
+        # groundedness signal feeding the confidence blend.
+        cm = cms.get(fc.name)
+        if cm is not None and cm.agree and fc.value:
+            ground_score = max(ground_score, 0.9)
+
         grounded = bool(fc.value) and ground_score >= settings.groundedness_min_score
 
         confidence = fuse_field_confidence(
@@ -103,7 +128,7 @@ def assemble(
             groundedness=ground_score,
             guardrail_ok=1.0,
         )
-        rationale = _rationale(fc, grounded, typed)
+        rationale = _rationale(fc, grounded, typed, cm)
         fields.append(
             ExtractedField(
                 name=fc.name, value=fc.value, confidence=confidence,
@@ -116,9 +141,14 @@ def assemble(
     return Record(**record_kwargs), fields, signals
 
 
-def _rationale(fc: FieldConsensus, grounded: bool, typed) -> str:
+def _rationale(fc: FieldConsensus, grounded: bool, typed, cm: CrossModal | None = None) -> str:
     bits = [f"concordância {fc.agreement:.0%} em {fc.n_present} amostra(s)"]
     bits.append("ancorado na fonte" if grounded else "sem âncora forte na fonte")
+    if cm is not None and fc.value:
+        if cm.agree:
+            bits.append("confirmado pelo OCR (voto multimodal)")
+        elif cm.disagrees:
+            bits.append(f"divergência visão↔OCR (OCR leu: {cm.ocr_value})")
     if fc.value and typed is None and fc.name in _RECORD_MAP:
         bits.append("valor não parseável para tipo esperado")
     return "; ".join(bits)

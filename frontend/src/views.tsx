@@ -1,6 +1,18 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "./api";
 import { DecisionBadge } from "./components";
+import {
+  IconArrowLeft,
+  IconArrowRight,
+  IconClose,
+  IconDocument,
+  IconDownload,
+  IconPencil,
+  IconPlus,
+  IconTrash,
+  IconUpload,
+} from "./icons";
+import logoUrl from "../assets/logo.png";
 import type { Project, ProjectFile, ProjectReport } from "./types";
 
 export type Tab = "files" | "analysis" | "graph" | "documentation";
@@ -54,8 +66,10 @@ export function ProjectHeader({
     <>
       <header className="topbar">
         <div className="brand">
-          <button className="btn ghost back" onClick={onBack}>← Projetos</button>
-          CAA{" "}
+          <button className="btn ghost back" onClick={onBack}>
+            <IconArrowLeft size={16} /> Projetos
+          </button>
+          <img className="brand-logo" src={logoUrl} alt="CAA" />
           {editing ? (
             <span className="rename">
               <input
@@ -70,7 +84,7 @@ export function ProjectHeader({
                   }
                 }}
               />
-              <button className="btn sm ok" onClick={save}>salvar</button>
+              <button className="btn sm primary" onClick={save}>salvar</button>
               <button className="btn sm ghost" onClick={() => { setName(project.name); setEditing(false); }}>
                 cancelar
               </button>
@@ -82,11 +96,11 @@ export function ProjectHeader({
         <div className="topbar-actions">
           {!editing && (
             <button className="btn ghost" onClick={() => setEditing(true)} title="Renomear projeto">
-              ✎ Renomear
+              <IconPencil size={15} /> Renomear
             </button>
           )}
           <button className="btn ghost danger" onClick={onDelete} title="Excluir projeto">
-            🗑 Excluir
+            <IconTrash size={15} /> Excluir
           </button>
         </div>
       </header>
@@ -174,7 +188,8 @@ export function ProjectsView({
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          CAA <span className="brand-sub">· Corporate Actions Agent</span>
+          <img className="brand-logo" src={logoUrl} alt="CAA — Corporate Actions Agent" />
+          <span className="brand-sub">· Corporate Actions Agent</span>
         </div>
         <label className="actor">
           operador:
@@ -187,7 +202,7 @@ export function ProjectsView({
       <section className="hero">
         <h1>Projetos de análise de eventos corporativos</h1>
         <p className="muted">
-          Crie um projeto, suba os avisos (PDF), rode a análise e revise os registros — com trilha
+          Crie um projeto, suba os arquivos (PDF), rode a análise e revise os registros — com trilha
           de auditoria e documentação final.
         </p>
         <div className="create-row">
@@ -198,8 +213,8 @@ export function ProjectsView({
             onChange={(e) => setName(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && create()}
           />
-          <button className="btn ok" onClick={create} disabled={busy || !name.trim()}>
-            + Novo projeto
+          <button className="btn primary" onClick={create} disabled={busy || !name.trim()}>
+            <IconPlus size={16} /> Novo projeto
           </button>
         </div>
       </section>
@@ -226,8 +241,8 @@ export function ProjectsView({
               )}
             </div>
             <div className="project-card-actions">
-              <button className="icon-btn" title="Renomear" onClick={() => rename(p)}>✎</button>
-              <button className="icon-btn danger" title="Excluir" onClick={() => remove(p)}>🗑</button>
+              <button className="icon-btn" title="Renomear" onClick={() => rename(p)}><IconPencil size={15} /></button>
+              <button className="icon-btn danger" title="Excluir" onClick={() => remove(p)}><IconTrash size={15} /></button>
             </div>
           </div>
         ))}
@@ -329,7 +344,7 @@ export function FilesPanel({
       )}
       <div className="upload-wrap">
         <div
-          className={`dropzone ${dragOver ? "over" : ""}`}
+          className={`dropzone bracket-frame ${dragOver ? "over" : ""}`}
           onDragOver={(e) => {
             e.preventDefault();
             setDragOver(true);
@@ -342,6 +357,10 @@ export function FilesPanel({
           }}
           onClick={() => inputRef.current?.click()}
         >
+          <span className="bracket tl" />
+          <span className="bracket tr" />
+          <span className="bracket bl" />
+          <span className="bracket br" />
           <input
             ref={inputRef}
             type="file"
@@ -350,7 +369,7 @@ export function FilesPanel({
             hidden
             onChange={(e) => upload(e.target.files)}
           />
-          <div className="dropzone-icon">⬆</div>
+          <div className="dropzone-icon"><IconUpload size={30} /></div>
           <div>
             <strong>Arraste PDFs aqui</strong> ou clique para selecionar
           </div>
@@ -362,7 +381,7 @@ export function FilesPanel({
             }}
             disabled={busy}
           >
-            ou carregar os 8 avisos de exemplo
+            ou carregar os 8 arquivos de exemplo
           </button>
         </div>
 
@@ -374,21 +393,23 @@ export function FilesPanel({
             <ul className="files">
               {files.map((f) => (
                 <li key={f.name}>
-                  <span className="file-icon">📄</span>
+                  <span className="file-icon"><IconDocument size={16} /></span>
                   <span className="file-name">{f.name}</span>
                   <span className="muted2">{(f.size / 1024).toFixed(0)} KB</span>
-                  <button className="file-remove" onClick={() => remove(f.name)} title="remover">✕</button>
+                  <button className="file-remove" onClick={() => remove(f.name)} title="remover"><IconClose size={15} /></button>
                 </li>
               ))}
             </ul>
           )}
           <div className="upload-actions">
-            <button className="btn ok lg" onClick={analyze} disabled={busy || analyzing || files.length === 0}>
-              {analyzing
-                ? "Analisando… (extração + guardrails + roteamento)"
-                : analyzed
-                  ? "Reanalisar →"
-                  : "Realizar análise →"}
+            <button className="btn primary lg" onClick={analyze} disabled={busy || analyzing || files.length === 0}>
+              {analyzing ? (
+                "Analisando… (extração + guardrails + roteamento)"
+              ) : (
+                <>
+                  {analyzed ? "Reanalisar" : "Realizar análise"} <IconArrowRight size={16} />
+                </>
+              )}
             </button>
           </div>
         </div>
@@ -425,6 +446,13 @@ export function DocumentationPanel({ project }: { project: Project }) {
     URL.revokeObjectURL(url);
   }
 
+  function downloadPdf() {
+    if (!report) return;
+    api
+      .projectReportPdf(project.id, `CAA_relatorio_${report.project.name.replace(/\s+/g, "_")}.pdf`)
+      .catch((e) => setError(String(e)));
+  }
+
   if (error) return <div className="error">{error}</div>;
   if (!report) return <div className="empty">Carregando documentação…</div>;
   if (report.summary.total === 0)
@@ -442,7 +470,14 @@ export function DocumentationPanel({ project }: { project: Project }) {
             <>Prévia — finalize na aba <strong>Análise</strong> para concluir o projeto.</>
           )}
         </div>
-        <button className="btn" onClick={download}>⬇ Baixar (JSON)</button>
+        <div className="panel-bar-actions">
+          <button className="btn primary" onClick={downloadPdf}>
+            <IconDownload size={16} /> Baixar relatório (PDF)
+          </button>
+          <button className="btn" onClick={download}>
+            <IconDownload size={16} /> JSON
+          </button>
+        </div>
       </div>
 
       <section className="report-head card">
@@ -468,7 +503,22 @@ export function DocumentationPanel({ project }: { project: Project }) {
           <div key={d.id} className="card report-doc">
             <div className="report-doc-h">
               <strong>{d.source_file}</strong>
-              <DecisionBadge decision={d.human_status === "APPROVED" ? "AUTO_APPROVE" : d.decision} />
+              <div className="report-doc-actions">
+                <DecisionBadge decision={d.human_status === "APPROVED" ? "AUTO_APPROVE" : d.decision} />
+                {(d.human_status === "APPROVED" || (d.decision === "AUTO_APPROVE" && !d.human_status)) && (
+                  <button
+                    className="btn sm"
+                    title="Baixar certificado (PDF)"
+                    onClick={() =>
+                      api
+                        .certificatePdf(d.id, `CAA_certificado_${d.source_file.replace(/\.pdf$/i, "")}.pdf`)
+                        .catch((e) => setError(String(e)))
+                    }
+                  >
+                    <IconDownload size={14} /> Certificado
+                  </button>
+                )}
+              </div>
             </div>
             <div className="report-doc-meta muted">
               {d.event_type} · identidade {d.golden_match} · DQ {d.dq_score.toFixed(2)}

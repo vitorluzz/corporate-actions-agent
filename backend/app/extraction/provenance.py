@@ -42,13 +42,13 @@ def _page_index(words: list[Word]) -> tuple[str, list[tuple[int, int, int]]]:
     return "".join(parts), spans
 
 
-def _union_bbox(words: list[Word], idxs: list[int]) -> BBox:
+def _union_bbox(words: list[Word], idxs: list[int], coord_system: str = "pdf_points") -> BBox:
     return BBox(
         x0=min(words[i].x0 for i in idxs),
         y0=min(words[i].y0 for i in idxs),
         x1=max(words[i].x1 for i in idxs),
         y1=max(words[i].y1 for i in idxs),
-        coord_system="pdf_points",
+        coord_system=coord_system,
     )
 
 
@@ -78,7 +78,7 @@ def locate_in_page(value: str | None, page: Page) -> Location | None:
     return Location(
         page=page.number,
         char_span=span,
-        bbox=_union_bbox(page.words, word_idxs),
+        bbox=_union_bbox(page.words, word_idxs, "image_px@200dpi" if page.ocr else "pdf_points"),
         score=score,
     )
 
@@ -109,7 +109,7 @@ def build_evidence(
         s, e = loc.char_span
         snippet = page.text[max(0, s - 20) : e + 20].strip()
     evidence = Evidence(
-        source=EvidenceSource.NATIVE_TEXT,
+        source=EvidenceSource.OCR if (page and page.ocr) else EvidenceSource.NATIVE_TEXT,
         quote=snippet,
         page=loc.page,
         bbox=loc.bbox,

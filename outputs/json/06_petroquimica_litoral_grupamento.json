@@ -5,10 +5,10 @@
     "pages": 1,
     "doc_class": "NATIVE",
     "extraction_method": "native_text+bbox",
-    "model": "heuristic-label-parser-v1",
+    "model": "gemini-2.5-flash",
     "model_version": null,
     "prompt_hash": "59568ae5abdd78b6",
-    "run_id": "5451aa15fe8e",
+    "run_id": "7e3c6df4b1f5",
     "doc_hash": "147d83f038f6ca94"
   },
   "record": {
@@ -17,9 +17,9 @@
     "isin": "BRPQLTACNOR8",
     "ticker": "PQLT3",
     "tipo_evento": "GRUPAMENTO",
-    "data_aprovacao": null,
+    "data_aprovacao": "2026-05-30",
     "data_com": "2026-06-26",
-    "data_ex": null,
+    "data_ex": "2026-06-29",
     "data_pagamento": null,
     "valor": null,
     "valor_bruto": null,
@@ -35,20 +35,20 @@
     "argmax": "GRUPAMENTO",
     "entropy": 0.0,
     "confidence": 1.0,
-    "samples": 5
+    "samples": 2
   },
   "fields": [
     {
       "name": "cnpj",
       "value": "55.666.777/0001-08",
       "confidence": {
-        "p_correct": 0.9840000000000001,
-        "p_uncertain": 0.015999999999999903,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "55.666.777/0001-08",
+        "quote": "CNPJ/ME nº 55.666.777/0001-08",
         "page": 1,
         "bbox": {
           "x0": 279.0865478515625,
@@ -64,42 +64,110 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
-      "name": "data_com",
-      "value": "26/06/2026",
+      "name": "data_aprovacao",
+      "value": "2026-05-30",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "26/06/2026",
+        "quote": "Assembleia Geral Extraordinária realizada em 30 de maio de 2026 aprovou",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
-          "y0": 405.273681640625,
-          "x1": 288.4809265136719,
-          "y1": 419.013671875,
+          "x0": 62.692909240722656,
+          "y0": 152.273681640625,
+          "x1": 532.58251953125,
+          "y1": 181.01368713378906,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1244,
-          1254
+          212,
+          283
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_com",
+      "value": "2026-06-26",
+      "confidence": {
+        "p_correct": 0.88,
+        "p_uncertain": 0.0,
+        "p_error": 0.12
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "A posição acionária considerada para fins de grupamento será a do final do pregão de 26 de junho de 2026 (data-base do grupamento).",
+        "page": 1,
+        "bbox": {
+          "x0": 299.6009216308594,
+          "y0": 447.273681640625,
+          "x1": 349.6408996582031,
+          "y1": 461.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1337,
+          1347
+        ],
+        "match_score": 0.6
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_ex",
+      "value": "2026-06-29",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "A partir de 29 de junho de 2026, as ações passarão a ser negociadas já grupadas.",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 250.273681640625,
+          "x1": 532.5824584960938,
+          "y1": 279.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          694,
+          774
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "emissor",
       "value": "PETROQUÍMICA LITORAL S.A.",
       "confidence": {
-        "p_correct": 0.93,
-        "p_uncertain": 0.06999999999999995,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -120,19 +188,31 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "isin",
       "value": "BRPQLTACNOR8",
       "confidence": {
-        "p_correct": 0.9900000000000001,
-        "p_uncertain": 0.009999999999999898,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "BRPQLTACNOR8",
+        "quote": "ISIN BRPQLTACNOR8",
         "page": 1,
         "bbox": {
           "x0": 298.4609069824219,
@@ -148,47 +228,31 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "moeda",
-      "value": "BRL",
+      "value": null,
       "confidence": {
-        "p_correct": 0.86,
-        "p_uncertain": 0.052500000000000005,
-        "p_error": 0.08750000000000001
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
       },
-      "evidence": {
-        "source": "NATIVE_TEXT",
-        "quote": "stas que a Assembleia Geral Extraordinária",
-        "page": 1,
-        "bbox": {
-          "x0": 440.4959411621094,
-          "y0": 152.273681640625,
-          "x1": 464.9459228515625,
-          "y1": 166.01368713378906,
-          "coord_system": "pdf_points"
-        },
-        "char_span": [
-          225,
-          228
-        ],
-        "match_score": 0.6667
-      },
-      "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "proporcao",
       "value": "10:1",
       "confidence": {
-        "p_correct": 0.9400000000000001,
-        "p_uncertain": 0.05999999999999994,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "10:1",
+        "quote": "na proporção de 10 (dez) ações existentes para 1 (uma) ação",
         "page": 1,
         "bbox": {
           "x0": 238.44091796875,
@@ -204,14 +268,14 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "ticker",
       "value": "PQLT3",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -232,14 +296,14 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "tipo_evento",
       "value": "Grupamento de ações (inplit)",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -260,7 +324,43 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     }
   ],
   "validation": {
@@ -315,9 +415,9 @@
       },
       {
         "name": "date_order",
-        "status": "NA",
+        "status": "PASS",
         "severity": "WARNING",
-        "message": "datas insuficientes para checar ordem",
+        "message": "datas em ordem coerente",
         "fields": []
       },
       {
@@ -343,13 +443,13 @@
       }
     ],
     "dq_score": {
-      "score": 0.9503,
+      "score": 0.9647,
       "components": {
-        "guardrails": 0.8571,
+        "guardrails": 0.8889,
         "groundedness": 1.0,
         "identity": 1.0,
         "type_confidence": 1.0,
-        "field_confidence": 0.9543
+        "field_confidence": 0.9867
       }
     }
   },
@@ -361,9 +461,9 @@
     "required_human_actions": []
   },
   "audit": {
-    "created_at": "2026-06-21T16:17:45.005077Z",
+    "created_at": "2026-06-21T23:53:42.400113Z",
     "sampling": {
-      "n": 5,
+      "n": 2,
       "temperature": 0.5
     },
     "tool_calls": [
@@ -398,7 +498,7 @@
       {
         "tool": "date_order",
         "arguments": {},
-        "result_summary": "NA — datas insuficientes para checar ordem"
+        "result_summary": "PASS — datas em ordem coerente"
       },
       {
         "tool": "event_type_substance",
@@ -418,7 +518,7 @@
     ],
     "versions": {
       "app": "0.1.0",
-      "llm": "cached:stub:heuristic-label-parser-v1"
+      "llm": "cached:gemini:gemini-2.5-flash"
     }
   }
 }

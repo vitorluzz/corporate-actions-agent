@@ -1,14 +1,17 @@
 import { useEffect, useMemo, useState } from "react";
 import { api } from "./api";
-import type { GraphData, GraphEdgeType, GraphNode, Project } from "./types";
+import type { GraphData, GraphEdge, GraphEdgeType, GraphFieldMeta, GraphNode, Project } from "./types";
 
 const EDGE_STYLE: Record<GraphEdgeType, { color: string; width: number; dash: string; label: string }> = {
-  belongs_to: { color: "#3f4654", width: 1.3, dash: "", label: "Pertence ao emissor" },
-  same_event_type: { color: "#60a5fa", width: 1.6, dash: "5 4", label: "Mesmo tipo de evento" },
-  same_security: { color: "#2dd4bf", width: 2.2, dash: "", label: "Mesmo ativo (ISIN/ticker)" },
-  possible_duplicate: { color: "#fb923c", width: 2.4, dash: "6 4", label: "Possível duplicidade" },
+  belongs_to: { color: "#8a8f97", width: 1.3, dash: "", label: "Pertence ao emissor" },
+  same_event_type: { color: "#4a4f58", width: 1.6, dash: "5 4", label: "Mesmo tipo de evento" },
+  same_security: { color: "#1e9e6b", width: 2.2, dash: "", label: "Mesmo ativo (ISIN/ticker)" },
+  possible_duplicate: { color: "#c24b3d", width: 2.4, dash: "6 4", label: "Possível duplicidade" },
 };
 const EDGE_ORDER: GraphEdgeType[] = ["belongs_to", "same_event_type", "same_security", "possible_duplicate"];
+
+const edgeId = (e: GraphEdge) => `${e.type}|${e.source}|${e.target}`;
+const plural = (n: number, s: string, p: string) => (n === 1 ? s : p);
 
 function effDecision(n: GraphNode): string {
   if (n.human_status === "APPROVED") return "AUTO_APPROVE";
@@ -16,9 +19,9 @@ function effDecision(n: GraphNode): string {
   return n.decision ?? "HUMAN_REVIEW";
 }
 function decisionColor(d: string): string {
-  if (d === "AUTO_APPROVE") return "#34d399";
-  if (d === "REJECT") return "#f87171";
-  return "#fbbf24";
+  if (d === "AUTO_APPROVE") return "#1e9e6b";
+  if (d === "REJECT") return "#c24b3d";
+  return "#e0a23e";
 }
 function decisionLabel(d: string): string {
   if (d === "AUTO_APPROVE") return "Auto-aprovado";
@@ -97,11 +100,14 @@ export default function GraphPanel({ project }: { project: Project }) {
   const [error, setError] = useState<string | null>(null);
   const [hidden, setHidden] = useState<Set<GraphEdgeType>>(new Set());
   const [active, setActive] = useState<string | null>(null);
+  const [activeEdge, setActiveEdge] = useState<string | null>(null);
   const [hover, setHover] = useState<string | null>(null);
 
   useEffect(() => {
     setData(null);
     setError(null);
+    setActive(null);
+    setActiveEdge(null);
     api.projectGraph(project.id).then(setData).catch((e) => setError(String(e)));
   }, [project.id]);
 
@@ -157,12 +163,41 @@ export default function GraphPanel({ project }: { project: Project }) {
     bounds.maxY - bounds.minY + pad * 2
   }`;
 
-  const focus = hover ?? active;
-  const neighbors = focus ? adjacency.get(focus) ?? new Set<string>() : null;
-  const isLit = (id: string) => !focus || id === focus || (neighbors?.has(id) ?? false);
-  const edgeLit = (s: string, t: string) => !focus || s === focus || t === focus;
+  const fieldMeta = data.field_meta ?? [];
+  const nodeById = (id: string) => data.nodes[idx.get(id) ?? -1] ?? null;
+  const selEdge = activeEdge ? visibleEdges.find((e) => edgeId(e) === activeEdge) ?? null : null;
+  const focusNode = hover ?? active;
+  const neighbors = focusNode ? adjacency.get(focusNode) ?? new Set<string>() : null;
 
-  const selected = active ? data.nodes[idx.get(active) ?? -1] : null;
+  const nodeLit = (id: string) => {
+    if (focusNode) return id === focusNode || (neighbors?.has(id) ?? false);
+    if (selEdge) return id === selEdge.source || id === selEdge.target;
+    return true;
+  };
+  const edgeIsLit = (e: GraphEdge) => {
+    if (focusNode) return e.source === focusNode || e.target === focusNode;
+    if (selEdge) return edgeId(e) === activeEdge;
+    return true;
+  };
+
+  const selectedNode = active ? nodeById(active) : null;
+  const relationsFor = (id: string) =>
+    visibleEdges
+      .filter((e) => e.source === id || e.target === id)
+      .map((e) => ({ edge: e, other: nodeById(e.source === id ? e.target : e.source) }));
+
+  function clearSel() {
+    setActive(null);
+    setActiveEdge(null);
+  }
+  function selectNode(id: string) {
+    setActiveEdge(null);
+    setActive((cur) => (cur === id ? null : id));
+  }
+  function selectEdge(id: string) {
+    setActive(null);
+    setActiveEdge((cur) => (cur === id ? null : id));
+  }
 
   function toggle(t: GraphEdgeType) {
     setHidden((prev) => {
@@ -202,26 +237,41 @@ export default function GraphPanel({ project }: { project: Project }) {
       </div>
 
       <div className="graph-wrap">
-        <svg className="graph-svg" viewBox={viewBox} preserveAspectRatio="xMidYMid meet" onClick={() => setActive(null)}>
-          {visibleEdges.map((e, i) => {
+        <svg className="graph-svg" viewBox={viewBox} preserveAspectRatio="xMidYMid meet" onClick={clearSel}>
+          {visibleEdges.map((e) => {
             const a = idx.get(e.source);
             const b = idx.get(e.target);
             if (a === undefined || b === undefined) return null;
             const st = EDGE_STYLE[e.type];
+            const id = edgeId(e);
+            const sel = id === activeEdge;
+            const lit = edgeIsLit(e);
+            const sharedCount = e.shared?.length ?? 0;
             return (
-              <line
-                key={i}
-                x1={pos[a].x}
-                y1={pos[a].y}
-                x2={pos[b].x}
-                y2={pos[b].y}
-                stroke={st.color}
-                strokeWidth={st.width}
-                strokeDasharray={st.dash}
-                opacity={edgeLit(e.source, e.target) ? 0.9 : 0.12}
+              <g
+                key={id}
+                className="gedge"
+                onClick={(ev) => {
+                  ev.stopPropagation();
+                  selectEdge(id);
+                }}
               >
-                {e.label && <title>{e.label}</title>}
-              </line>
+                <line x1={pos[a].x} y1={pos[a].y} x2={pos[b].x} y2={pos[b].y} stroke="transparent" strokeWidth={14} />
+                <line
+                  x1={pos[a].x}
+                  y1={pos[a].y}
+                  x2={pos[b].x}
+                  y2={pos[b].y}
+                  stroke={st.color}
+                  strokeWidth={sel ? st.width + 1.6 : st.width}
+                  strokeDasharray={e.provisional ? "2 4" : st.dash}
+                  opacity={lit ? (e.provisional ? 0.65 : 0.95) : 0.1}
+                />
+                <title>
+                  {e.label}
+                  {sharedCount > 0 ? ` · ${sharedCount} ${plural(sharedCount, "campo em comum", "campos em comum")}` : ""}
+                </title>
+              </g>
             );
           })}
 
@@ -229,7 +279,7 @@ export default function GraphPanel({ project }: { project: Project }) {
             const p = pos[idx.get(n.id)!];
             const cnt = docCount.get(n.id) ?? 1;
             const s = 13 + Math.min(10, cnt * 2);
-            const lit = isLit(n.id);
+            const lit = nodeLit(n.id);
             return (
               <g
                 key={n.id}
@@ -239,7 +289,7 @@ export default function GraphPanel({ project }: { project: Project }) {
                 onMouseLeave={() => setHover(null)}
                 onClick={(ev) => {
                   ev.stopPropagation();
-                  setActive(n.id === active ? null : n.id);
+                  selectNode(n.id);
                 }}
               >
                 <rect
@@ -248,8 +298,8 @@ export default function GraphPanel({ project }: { project: Project }) {
                   width={s * 2}
                   height={s * 2}
                   transform={`rotate(45 ${p.x} ${p.y})`}
-                  fill={n.known ? "#312e81" : "#3a2a13"}
-                  stroke={n.known ? "#818cf8" : "#d97706"}
+                  fill={n.known ? "rgba(16, 28, 44, 0.10)" : "rgba(224, 162, 62, 0.16)"}
+                  stroke={n.known ? "#101c2c" : "#e0a23e"}
                   strokeWidth={active === n.id ? 3 : 1.8}
                 />
                 <text x={p.x} y={p.y - s - 8} textAnchor="middle" className="glabel entity">
@@ -262,7 +312,7 @@ export default function GraphPanel({ project }: { project: Project }) {
           {docs.map((n) => {
             const p = pos[idx.get(n.id)!];
             const dec = effDecision(n);
-            const lit = isLit(n.id);
+            const lit = nodeLit(n.id);
             return (
               <g
                 key={n.id}
@@ -272,7 +322,7 @@ export default function GraphPanel({ project }: { project: Project }) {
                 onMouseLeave={() => setHover(null)}
                 onClick={(ev) => {
                   ev.stopPropagation();
-                  setActive(n.id === active ? null : n.id);
+                  selectNode(n.id);
                 }}
               >
                 <circle
@@ -280,7 +330,7 @@ export default function GraphPanel({ project }: { project: Project }) {
                   cy={p.y}
                   r={14}
                   fill={decisionColor(dec)}
-                  stroke={active === n.id ? "#e6edf6" : "#0d1117"}
+                  stroke={active === n.id ? "#101c2c" : "rgba(16, 28, 44, 0.45)"}
                   strokeWidth={active === n.id ? 3 : 1.5}
                 />
                 <text x={p.x} y={p.y + 28} textAnchor="middle" className="glabel">
@@ -292,15 +342,30 @@ export default function GraphPanel({ project }: { project: Project }) {
         </svg>
 
         <aside className="graph-detail">
-          {selected ? (
-            <NodeDetail node={selected} count={docCount.get(selected.id)} />
+          {selEdge ? (
+            <EdgeEvidence
+              edge={selEdge}
+              source={nodeById(selEdge.source)}
+              target={nodeById(selEdge.target)}
+              fieldMeta={fieldMeta}
+            />
+          ) : selectedNode ? (
+            <NodeDetail
+              node={selectedNode}
+              count={docCount.get(selectedNode.id)}
+              relations={relationsFor(selectedNode.id)}
+              onSelectEdge={selectEdge}
+            />
           ) : (
             <div className="muted detail-hint">
               <p>
                 Cada <strong>círculo</strong> é um documento (cor = decisão); cada <strong>losango</strong> é um emissor.
-                As linhas mostram como os documentos se relacionam.
+                As <strong>linhas</strong> mostram como os documentos se relacionam.
               </p>
-              <p>Passe o mouse para destacar conexões · clique para ver os detalhes · clique na legenda para filtrar.</p>
+              <p>
+                <strong>Clique em uma linha</strong> para ver quais campos comprovam o vínculo entre os arquivos.
+                Passe o mouse para destacar conexões · clique na legenda para filtrar.
+              </p>
             </div>
           )}
         </aside>
@@ -309,7 +374,47 @@ export default function GraphPanel({ project }: { project: Project }) {
   );
 }
 
-function NodeDetail({ node, count }: { node: GraphNode; count?: number }) {
+type Relation = { edge: GraphEdge; other: GraphNode | null };
+
+function RelationsList({ relations, onSelectEdge }: { relations: Relation[]; onSelectEdge: (id: string) => void }) {
+  if (relations.length === 0) return null;
+  return (
+    <div className="relations">
+      <div className="relations-h">Relações ({relations.length})</div>
+      {relations.map((r) => {
+        const st = EDGE_STYLE[r.edge.type];
+        const n = r.edge.shared?.length ?? 0;
+        return (
+          <button
+            key={edgeId(r.edge)}
+            className="relation-item"
+            onClick={() => onSelectEdge(edgeId(r.edge))}
+            title={`${r.edge.label ?? st.label} — ver campos em comum`}
+          >
+            <span className="rel-dot" style={{ background: st.color }} />
+            <span className="rel-other">
+              {r.other?.kind === "entity" ? "◆ " : ""}
+              {r.other?.label ?? "—"}
+            </span>
+            <span className="rel-meta">{n > 0 ? `${n} ${plural(n, "campo", "campos")}` : st.label}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function NodeDetail({
+  node,
+  count,
+  relations,
+  onSelectEdge,
+}: {
+  node: GraphNode;
+  count?: number;
+  relations: Relation[];
+  onSelectEdge: (id: string) => void;
+}) {
   if (node.kind === "entity") {
     return (
       <div className="detail-card">
@@ -319,6 +424,7 @@ function NodeDetail({ node, count }: { node: GraphNode; count?: number }) {
         <Row k="Segmento" v={node.segment ?? "—"} />
         <Row k="Na base golden" v={node.known ? "Sim" : "Não"} />
         <Row k="Documentos" v={String(count ?? 0)} />
+        <RelationsList relations={relations} onSelectEdge={onSelectEdge} />
       </div>
     );
   }
@@ -336,6 +442,75 @@ function NodeDetail({ node, count }: { node: GraphNode; count?: number }) {
       <Row k="Tipo de evento" v={node.event_type ?? "—"} />
       <Row k="Golden match" v={node.golden_status ?? "—"} />
       <Row k="Data quality" v={node.dq_score !== undefined ? `${(node.dq_score * 100).toFixed(0)}%` : "—"} />
+      <RelationsList relations={relations} onSelectEdge={onSelectEdge} />
+    </div>
+  );
+}
+
+function EdgeEvidence({
+  edge,
+  source,
+  target,
+  fieldMeta,
+}: {
+  edge: GraphEdge;
+  source: GraphNode | null;
+  target: GraphNode | null;
+  fieldMeta: GraphFieldMeta[];
+}) {
+  const st = EDGE_STYLE[edge.type];
+  const shared = new Set(edge.shared ?? []);
+  const head = (n: GraphNode | null) => (n ? (n.kind === "entity" ? n.label : n.ticker || n.label) : "—");
+  const rows = fieldMeta.filter(
+    (m) => shared.has(m.key) || (source?.fields?.[m.key] ?? null) !== null || (target?.fields?.[m.key] ?? null) !== null
+  );
+  return (
+    <div className="detail-card">
+      <span className="kind-tag" style={{ borderColor: st.color, color: st.color }}>
+        Relação
+      </span>
+      <h3>{st.label}</h3>
+      <div className="evidence-pair">
+        <span title={source?.label}>{source?.label ?? "—"}</span>
+        <span className="evidence-arrow">↔</span>
+        <span title={target?.label}>{target?.label ?? "—"}</span>
+      </div>
+      {edge.provisional && (
+        <p className="ev-note" style={{ color: "var(--warn-ink)" }}>
+          ⚠ Tipo de evento em revisão — vínculo provisório até confirmação humana.
+        </p>
+      )}
+      <p className="muted ev-note">
+        {shared.size > 0
+          ? `${shared.size} ${plural(shared.size, "campo idêntico comprova", "campos idênticos comprovam")} o vínculo (destacado${plural(shared.size, "", "s")} abaixo).`
+          : "Vínculo por tipo de evento — sem campos de valor idênticos."}
+      </p>
+      <table className="cmp-table">
+        <thead>
+          <tr>
+            <th>Campo</th>
+            <th title={source?.label}>{head(source)}</th>
+            <th title={target?.label}>{head(target)}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((m) => {
+            const av = source?.fields?.[m.key] ?? null;
+            const bv = target?.fields?.[m.key] ?? null;
+            const match = shared.has(m.key);
+            return (
+              <tr key={m.key} className={match ? "cmp-match" : ""}>
+                <td className="cmp-field">
+                  {match && <span className="cmp-check">✓</span>}
+                  {m.label}
+                </td>
+                <td className={av == null ? "cmp-empty" : ""}>{av ?? "—"}</td>
+                <td className={bv == null ? "cmp-empty" : ""}>{bv ?? "—"}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }

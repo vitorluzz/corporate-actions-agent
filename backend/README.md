@@ -1,5 +1,6 @@
-# Asset Servicing Agent — backend
+# CAA — Corporate Actions Agent · backend
 
-Code-first agent that turns corporate-event notices (PDFs) into validated,
-auditable structured records with uncertainty handling. See the repository root
-`README.md` for full architecture and execution instructions.
+Agente *code-first* que transforma avisos de eventos corporativos (PDFs) em
+registros estruturados validados e auditáveis, com tratamento de incerteza. Veja o
+`README.md` na raiz do repositório para a arquitetura e as instruções de execução
+completas.

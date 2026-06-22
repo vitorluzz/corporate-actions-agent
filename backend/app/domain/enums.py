@@ -115,4 +115,6 @@ class DocumentClass(str, Enum):
 class EvidenceSource(str, Enum):
     NATIVE_TEXT = "NATIVE_TEXT"  # extraído do texto + bbox via PyMuPDF
     VISION = "VISION"            # extraído por visão (scan) + bbox espacial
+    OCR = "OCR"                  # extraído por OCR (Tesseract) de um escaneado + bbox em pixels
+    VISION_OCR = "VISION+OCR"    # lido pela visão (Gemini) e ancorado na palavra/bbox do OCR
     DERIVED = "DERIVED"          # derivado/calculado, sem âncora textual direta

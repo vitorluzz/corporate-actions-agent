@@ -5,10 +5,10 @@
     "pages": 1,
     "doc_class": "NATIVE",
     "extraction_method": "native_text+bbox",
-    "model": "heuristic-label-parser-v1",
+    "model": "gemini-2.5-flash",
     "model_version": null,
     "prompt_hash": "59568ae5abdd78b6",
-    "run_id": "5451aa15fe8e",
+    "run_id": "7e3c6df4b1f5",
     "doc_hash": "a509637f4b258454"
   },
   "record": {
@@ -17,15 +17,15 @@
     "isin": "BRCNHZACNOR5",
     "ticker": "CNHZ3",
     "tipo_evento": "BONIFICACAO",
-    "data_aprovacao": null,
+    "data_aprovacao": "2026-06-04",
     "data_com": "2026-06-18",
     "data_ex": "2026-06-19",
-    "data_pagamento": null,
+    "data_pagamento": "2026-06-26",
     "valor": null,
     "valor_bruto": null,
     "valor_liquido": null,
     "irrf_rate": null,
-    "proporcao": "5%",
+    "proporcao": "1 ação nova para cada 20 ações",
     "moeda": "BRL"
   },
   "event_type": {
@@ -35,20 +35,20 @@
     "argmax": "BONIFICACAO",
     "entropy": 0.0,
     "confidence": 1.0,
-    "samples": 5
+    "samples": 2
   },
   "fields": [
     {
       "name": "cnpj",
       "value": "09.888.999/0001-21",
       "confidence": {
-        "p_correct": 0.9840000000000001,
-        "p_uncertain": 0.015999999999999903,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "09.888.999/0001-21",
+        "quote": "CNPJ/ME nº 09.888.999/0001-21",
         "page": 1,
         "bbox": {
           "x0": 279.0865478515625,
@@ -64,70 +64,126 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-04",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Assembleia Geral Extraordinária de 04 de junho de 2026 aprovou",
+        "page": 1,
+        "bbox": {
+          "x0": 62.692909240722656,
+          "y0": 152.273681640625,
+          "x1": 532.5825805664062,
+          "y1": 181.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          206,
+          268
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_com",
-      "value": "18/06/2026",
+      "value": "2026-06-18",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "18/06/2026",
+        "quote": "acionistas inscritos nos registros da Companhia ao final do dia 18 de junho de 2026 (“data com”).",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
-          "y0": 366.273681640625,
-          "x1": 288.4809265136719,
-          "y1": 380.013671875,
+          "x0": 62.692909240722656,
+          "y0": 220.273681640625,
+          "x1": 532.58251953125,
+          "y1": 249.01368713378906,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          992,
-          1002
+          502,
+          599
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_ex",
-      "value": "19/06/2026",
+      "value": "2026-06-19",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "19/06/2026",
+        "quote": "As ações passarão a ser negociadas “ex-bonificação” a partir de 19 de junho de 2026.",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
-          "y0": 387.273681640625,
-          "x1": 288.4809265136719,
-          "y1": 401.013671875,
+          "x0": 122.70291137695312,
+          "y0": 235.273681640625,
+          "x1": 505.1227722167969,
+          "y1": 249.01368713378906,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1025,
-          1035
+          600,
+          684
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_pagamento",
+      "value": "2026-06-26",
+      "confidence": {
+        "p_correct": 0.88,
+        "p_uncertain": 0.0,
+        "p_error": 0.12
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "Crédito das ações bonificadas 26/06/2026",
+        "page": 1,
+        "bbox": {
+          "x0": 238.44091796875,
+          "y0": 408.273681640625,
+          "x1": 288.4809265136719,
+          "y1": 422.013671875,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          1066,
+          1076
+        ],
+        "match_score": 0.6
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "emissor",
       "value": "CONSTRUTORA HORIZONTE S.A.",
       "confidence": {
-        "p_correct": 0.93,
-        "p_uncertain": 0.06999999999999995,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -148,19 +204,31 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "irrf",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "isin",
       "value": "BRCNHZACNOR5",
       "confidence": {
-        "p_correct": 0.9900000000000001,
-        "p_uncertain": 0.009999999999999898,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "BRCNHZACNOR5",
+        "quote": "ISIN BRCNHZACNOR5",
         "page": 1,
         "bbox": {
           "x0": 300.1109313964844,
@@ -176,70 +244,54 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "moeda",
-      "value": "BRL",
+      "value": null,
       "confidence": {
-        "p_correct": 0.86,
-        "p_uncertain": 0.052500000000000005,
-        "p_error": 0.08750000000000001
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
       },
-      "evidence": {
-        "source": "NATIVE_TEXT",
-        "quote": "R$",
-        "page": 1,
-        "bbox": {
-          "x0": 372.8880615234375,
-          "y0": 152.273681640625,
-          "x1": 424.56805419921875,
-          "y1": 166.01368713378906,
-          "coord_system": "pdf_points"
-        },
-        "char_span": [
-          210,
-          213
-        ],
-        "match_score": 0.6667
-      },
-      "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "proporcao",
-      "value": "5%",
+      "value": "1 ação nova para cada 20 ações",
       "confidence": {
-        "p_correct": 0.9400000000000001,
-        "p_uncertain": 0.05999999999999994,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "5%",
+        "quote": "A bonificação será atribuída na proporção de 1 (uma) ação nova para cada 20 (vinte) ações",
         "page": 1,
         "bbox": {
-          "x0": 386.3109130859375,
+          "x0": 238.44091796875,
           "y0": 324.273681640625,
-          "x1": 407.4208679199219,
+          "x1": 383.5308837890625,
           "y1": 338.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          914,
-          916
+          882,
+          912
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "ticker",
       "value": "CNHZ3",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -260,14 +312,14 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "tipo_evento",
       "value": "Bonificação em ações",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -288,7 +340,43 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "valor",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_bruto",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
+    },
+    {
+      "name": "valor_liquido",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     }
   ],
   "validation": {
@@ -366,13 +454,13 @@
       }
     ],
     "dq_score": {
-      "score": 0.8167,
+      "score": 0.8215,
       "components": {
         "guardrails": 0.9444,
         "groundedness": 1.0,
         "identity": 0.2,
         "type_confidence": 1.0,
-        "field_confidence": 0.956
+        "field_confidence": 0.988
       }
     }
   },
@@ -386,9 +474,9 @@
     ]
   },
   "audit": {
-    "created_at": "2026-06-21T16:17:45.507280Z",
+    "created_at": "2026-06-21T23:53:47.431749Z",
     "sampling": {
-      "n": 5,
+      "n": 2,
       "temperature": 0.5
     },
     "tool_calls": [
@@ -443,7 +531,7 @@
     ],
     "versions": {
       "app": "0.1.0",
-      "llm": "cached:stub:heuristic-label-parser-v1"
+      "llm": "cached:gemini:gemini-2.5-flash"
     }
   }
 }

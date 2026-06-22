@@ -53,6 +53,21 @@ async function errText(res: Response): Promise<string> {
   }
 }
 
+/** Fetch a binary endpoint and trigger a browser download with the given filename. */
+async function downloadBlob(path: string, filename: string): Promise<void> {
+  const res = await fetch(`${API}${path}`);
+  if (!res.ok) throw new Error(await errText(res));
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
 export interface ReviewBody {
   actor: string;
   decision: "approve" | "reject" | "save";
@@ -93,4 +108,8 @@ export const api = {
   completeProject: (pid: string) => post<ProjectReport>(`/projects/${pid}/complete`),
   projectReport: (pid: string) => get<ProjectReport>(`/projects/${pid}/report`),
   projectGraph: (pid: string) => get<GraphData>(`/projects/${pid}/graph`),
+  certificatePdf: (id: string, filename: string) =>
+    downloadBlob(`/documents/${id}/certificate.pdf`, filename),
+  projectReportPdf: (pid: string, filename: string) =>
+    downloadBlob(`/projects/${pid}/report.pdf`, filename),
 };

@@ -26,9 +26,12 @@ dependencies = [
     "pillow>=10.4",
     "rapidfuzz>=3.10",
     "python-dateutil>=2.9",
+    # PDF artifacts (branded certificates / reports)
+    "weasyprint>=62.3",
     # Reliability / observability
     "tenacity>=9.0",
     "structlog>=24.4",
+    "pytesseract>=0.3.13",
 ]
 
 [project.scripts]

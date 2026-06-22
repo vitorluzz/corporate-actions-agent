@@ -5,10 +5,10 @@
     "pages": 1,
     "doc_class": "NATIVE",
     "extraction_method": "native_text+bbox",
-    "model": "heuristic-label-parser-v1",
+    "model": "gemini-2.5-flash",
     "model_version": null,
     "prompt_hash": "59568ae5abdd78b6",
-    "run_id": "5451aa15fe8e",
+    "run_id": "7e3c6df4b1f5",
     "doc_hash": "64e0787afd32c0d9"
   },
   "record": {
@@ -17,7 +17,7 @@
     "isin": "BRBMRDACNPR7",
     "ticker": "BMRD4",
     "tipo_evento": "JCP",
-    "data_aprovacao": null,
+    "data_aprovacao": "2026-06-02",
     "data_com": "2026-06-16",
     "data_ex": "2026-06-17",
     "data_pagamento": "2026-08-14",
@@ -35,20 +35,20 @@
     "argmax": "JCP",
     "entropy": 0.0,
     "confidence": 1.0,
-    "samples": 5
+    "samples": 2
   },
   "fields": [
     {
       "name": "cnpj",
       "value": "60.111.222/0001-55",
       "confidence": {
-        "p_correct": 0.9840000000000001,
-        "p_uncertain": 0.015999999999999903,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "60.111.222/0001-55",
+        "quote": "CNPJ/ME nº 60.111.222/0001-55",
         "page": 1,
         "bbox": {
           "x0": 279.0865478515625,
@@ -64,98 +64,126 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "data_aprovacao",
+      "value": "2026-06-02",
+      "confidence": {
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
+        "p_error": 0.0
+      },
+      "evidence": {
+        "source": "NATIVE_TEXT",
+        "quote": "em reunião realizada em 02 de junho de 2026",
+        "page": 1,
+        "bbox": {
+          "x0": 131.77938842773438,
+          "y0": 167.273681640625,
+          "x1": 339.970947265625,
+          "y1": 181.01368713378906,
+          "coord_system": "pdf_points"
+        },
+        "char_span": [
+          268,
+          311
+        ],
+        "match_score": 1.0
+      },
+      "grounded": true,
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_com",
-      "value": "16/06/2026",
+      "value": "2026-06-16",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "16/06/2026",
+        "quote": "16 de junho de 2026 (“data com”)",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
-          "y0": 417.273681640625,
-          "x1": 288.4809265136719,
-          "y1": 431.013671875,
+          "x0": 62.692909240722656,
+          "y0": 273.273681640625,
+          "x1": 532.5825805664062,
+          "y1": 302.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1182,
-          1192
+          878,
+          910
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_ex",
-      "value": "17/06/2026",
+      "value": "2026-06-17",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "17/06/2026",
+        "quote": "a partir de 17 de junho de 2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
-          "y0": 438.273681640625,
-          "x1": 288.4809265136719,
-          "y1": 452.013671875,
+          "x0": 356.69287109375,
+          "y0": 288.273681640625,
+          "x1": 498.4527893066406,
+          "y1": 302.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1207,
-          1217
+          956,
+          987
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "data_pagamento",
-      "value": "14/08/2026",
+      "value": "2026-08-14",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "14/08/2026",
+        "quote": "Data de pagamento 14/08/2026",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 62.692909240722656,
           "y0": 459.273681640625,
           "x1": 288.4809265136719,
-          "y1": 473.013671875,
+          "y1": 473.09368896484375,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1236,
+          1218,
           1246
         ],
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "emissor",
       "value": "BANCO MERIDIONAL DO BRASIL S.A.",
       "confidence": {
-        "p_correct": 0.93,
-        "p_uncertain": 0.06999999999999995,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -176,19 +204,19 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "irrf",
-      "value": "17,5%",
+      "value": "17.5",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
-        "p_error": 0.0
+        "p_correct": 0.925,
+        "p_uncertain": 0.0,
+        "p_error": 0.07499999999999996
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "17,5%",
+        "quote": "IRRF na fonte 17,5%",
         "page": 1,
         "bbox": {
           "x0": 314.7532958984375,
@@ -199,24 +227,24 @@
         },
         "char_span": [
           658,
-          663
+          662
         ],
-        "match_score": 1.0
+        "match_score": 0.75
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "isin",
       "value": "BRBMRDACNPR7",
       "confidence": {
-        "p_correct": 0.9900000000000001,
-        "p_uncertain": 0.009999999999999898,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
         "source": "NATIVE_TEXT",
-        "quote": "BRBMRDACNPR7",
+        "quote": "ISIN BRBMRDACNPR7",
         "page": 1,
         "bbox": {
           "x0": 301.7809143066406,
@@ -232,15 +260,15 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "moeda",
       "value": "BRL",
       "confidence": {
-        "p_correct": 0.86,
-        "p_uncertain": 0.052500000000000005,
-        "p_error": 0.08750000000000001
+        "p_correct": 0.9,
+        "p_uncertain": 0.0,
+        "p_error": 0.09999999999999998
       },
       "evidence": {
         "source": "NATIVE_TEXT",
@@ -260,14 +288,26 @@
         "match_score": 0.6667
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
+    },
+    {
+      "name": "proporcao",
+      "value": null,
+      "confidence": {
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
+      },
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "ticker",
       "value": "BMRD4",
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
+        "p_correct": 1.0,
+        "p_uncertain": 0.0,
         "p_error": 0.0
       },
       "evidence": {
@@ -288,91 +328,75 @@
         "match_score": 1.0
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
-      "name": "tipo_evento",
-      "value": "Juros sobre o Capital Próprio (JCP)",
+      "name": "valor",
+      "value": null,
       "confidence": {
-        "p_correct": 0.9800000000000001,
-        "p_uncertain": 0.019999999999999907,
-        "p_error": 0.0
+        "p_correct": 0.15,
+        "p_uncertain": 0.5666666666666667,
+        "p_error": 0.2833333333333333
       },
-      "evidence": {
-        "source": "NATIVE_TEXT",
-        "quote": "Juros sobre o Capital Próprio (JCP)",
-        "page": 1,
-        "bbox": {
-          "x0": 278.9927978515625,
-          "y0": 130.25367736816406,
-          "x1": 465.42083740234375,
-          "y1": 145.4006805419922,
-          "coord_system": "pdf_points"
-        },
-        "char_span": [
-          126,
-          161
-        ],
-        "match_score": 1.0
-      },
-      "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "evidence": null,
+      "grounded": false,
+      "rationale": "concordância 0% em 0 amostra(s); sem âncora forte na fonte"
     },
     {
       "name": "valor_bruto",
-      "value": "R$ 0,1738420000",
+      "value": "0.1738420000",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
-        "p_error": 0.0
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
       },
       "evidence": {
         "source": "NATIVE_TEXT",
         "quote": "R$ 0,1738420000",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 254.00091552734375,
           "y0": 339.273681640625,
           "x1": 317.94091796875,
           "y1": 353.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1079,
+          1082,
           1094
         ],
-        "match_score": 1.0
+        "match_score": 0.9167
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     },
     {
       "name": "valor_liquido",
-      "value": "R$ 0,1434196500",
+      "value": "0.1434196500",
       "confidence": {
-        "p_correct": 0.9700000000000001,
-        "p_uncertain": 0.02999999999999992,
-        "p_error": 0.0
+        "p_correct": 0.975,
+        "p_uncertain": 0.0,
+        "p_error": 0.025000000000000022
       },
       "evidence": {
         "source": "NATIVE_TEXT",
         "quote": "R$ 0,1434196500",
         "page": 1,
         "bbox": {
-          "x0": 238.44091796875,
+          "x0": 254.00091552734375,
           "y0": 396.273681640625,
           "x1": 317.94091796875,
           "y1": 410.013671875,
           "coord_system": "pdf_points"
         },
         "char_span": [
-          1143,
+          1146,
           1158
         ],
-        "match_score": 1.0
+        "match_score": 0.9167
       },
       "grounded": true,
-      "rationale": "concordância 100% em 5 amostra(s); ancorado na fonte"
+      "rationale": "concordância 100% em 2 amostra(s); ancorado na fonte"
     }
   ],
   "validation": {
@@ -459,13 +483,13 @@
       }
     ],
     "dq_score": {
-      "score": 0.967,
+      "score": 0.9699,
       "components": {
         "guardrails": 0.9091,
         "groundedness": 1.0,
         "identity": 1.0,
         "type_confidence": 1.0,
-        "field_confidence": 0.962
+        "field_confidence": 0.9813
       }
     }
   },
@@ -477,9 +501,9 @@
     "required_human_actions": []
   },
   "audit": {
-    "created_at": "2026-06-21T16:17:44.980328Z",
+    "created_at": "2026-06-21T23:53:42.378040Z",
     "sampling": {
-      "n": 5,
+      "n": 2,
       "temperature": 0.5
     },
     "tool_calls": [
@@ -534,7 +558,7 @@
     ],
     "versions": {
       "app": "0.1.0",
-      "llm": "cached:stub:heuristic-label-parser-v1"
+      "llm": "cached:gemini:gemini-2.5-flash"
     }
   }
 }

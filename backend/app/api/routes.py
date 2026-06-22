@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import re
 import shutil
 from pathlib import Path
 
@@ -20,10 +21,12 @@ from app.api.schemas import (
     ReviewRequest,
 )
 from app.config import get_settings
+from app.domain.enums import RoutingDecision
 from app.domain.golden import GoldenBase
 from app.domain.schemas import DocumentResult
 from app.extraction.pdf import render_page_png
 from app.llm.factory import build_llm_client
+from app.output.pdf import render_certificate_pdf, render_project_report_pdf
 from app.output.writer import _exceptions_json, _exceptions_markdown
 from app.persistence import repository
 
@@ -43,6 +46,18 @@ def _doc_file_path(row) -> Path:
     if row.project_id:
         return settings.uploads_dir / row.project_id / row.source_file
     return settings.documents_dir / row.source_file
+
+
+def _is_approved(row) -> bool:
+    """An artifact is 'approved' once a human approves it, or when the deterministic
+    policy auto-approved it and no human has since acted."""
+    return row.human_status == "APPROVED" or (
+        row.decision == RoutingDecision.AUTO_APPROVE.value and row.human_status is None
+    )
+
+
+def _safe_filename(stem: str) -> str:
+    return re.sub(r"[^A-Za-z0-9._-]+", "_", stem).strip("_") or "CAA"
 
 
 def _results(session: Session) -> list[DocumentResult]:
@@ -115,6 +130,39 @@ def get_page_image(doc_id: str, session: Session = Depends(get_session)) -> Resp
     if not path.exists():
         raise HTTPException(status_code=404, detail="pdf file not found")
     return Response(content=render_page_png(path, 1, dpi=150), media_type="image/png")
+
+
+@router.get("/documents/{doc_id}/certificate.pdf")
+def get_certificate(doc_id: str, session: Session = Depends(get_session)) -> Response:
+    """Branded, auditable PDF certificate — only available once the artifact is approved."""
+    row = repository.get_document(session, doc_id)
+    if row is None:
+        raise HTTPException(status_code=404, detail="document not found")
+    if not _is_approved(row):
+        raise HTTPException(status_code=409, detail="documento ainda não foi aprovado")
+    result = DocumentResult.model_validate(row.result)
+    audit = repository.audit_trail(session, doc_id)
+    page_png: bytes | None = None
+    path = _doc_file_path(row)
+    if path.exists():
+        try:
+            page_png = render_page_png(path, 1, dpi=110)
+        except Exception:  # noqa: BLE001 - image is optional; never block the certificate
+            page_png = None
+    project_name = None
+    if row.project_id:
+        proj = repository.get_project(session, row.project_id)
+        project_name = proj.name if proj else None
+    try:
+        pdf = render_certificate_pdf(result, audit, page_png, project_name, row.human_status)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    fname = f"CAA_certificado_{_safe_filename(row.source_file.rsplit('.', 1)[0])}.pdf"
+    return Response(
+        content=pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+    )
 
 
 @router.get("/documents/{doc_id}/audit", response_model=list[AuditEventOut])
@@ -320,6 +368,25 @@ def get_project_report(pid: str, session: Session = Depends(get_session)) -> dic
         return repository.project_report(session, pid)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail="project not found") from exc
+
+
+@router.get("/projects/{pid}/report.pdf")
+def get_project_report_pdf(pid: str, session: Session = Depends(get_session)) -> Response:
+    """Branded project report PDF — preview while in review, final once completed."""
+    try:
+        report = repository.project_report(session, pid)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail="project not found") from exc
+    try:
+        pdf = render_project_report_pdf(report)
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    fname = f"CAA_relatorio_{_safe_filename(report['project']['name'])}.pdf"
+    return Response(
+        content=pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{fname}"'},
+    )
 
 
 @router.get("/projects/{pid}/graph")

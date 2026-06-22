@@ -98,13 +98,13 @@ def decide_routing(
     if is_scanned:
         if not record.isin:
             reasons.append(
-                "documento escaneado não pôde ser lido automaticamente "
-                "(sem camada de texto; requer visão/OCR ou leitura humana)"
+                "documento escaneado com leitura automática incompleta "
+                "(OCR/visão não recuperou os identificadores) — requer leitura humana"
             )
             actions.append("ler o documento manualmente ou reprocessar com visão (Gemini)")
         else:
-            reasons.append("documento escaneado — extração por visão; conferir a leitura")
-            actions.append("validar valores contra a imagem")
+            reasons.append("documento escaneado — leitura automática (OCR/visão); conferir os valores contra a imagem")
+            actions.append("validar os valores extraídos contra a imagem do documento")
 
     if dq.score < settings.dq_review_threshold:
         reasons.append(f"Data Quality abaixo do limiar ({dq.score:.2f} < {settings.dq_review_threshold:.2f})")
